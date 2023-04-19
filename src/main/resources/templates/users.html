@@ -11,24 +11,29 @@
     <h1>Users page</h1>
     <hr>
 
-    <table>
-        <thead>
+    <table class="table table-hover table-striped table-bordered">
+        <thead class="table-dark">
         <tr>
             <th>User id</th>
             <th>Name</th>
             <th>Username</th>
             <th>Role name</th>
             <th>Date added</th>
+            <th>Actions</th>
         </tr>
         </thead>
-        <tbody>
-          <tr th:each="user : ${userList}">
-              <td th:text="${user.userId}"></td>
-              <td th:text="${user.name}"></td>
-              <td th:text="${user.username}"></td>
-              <td th:text="${user.role.roleName}"></td>
-              <td th:text="${user.dateAdded}"></td>
-          </tr>
+        <tbody class="table-primary">
+        <tr th:each="user : ${userList}">
+            <td th:text="${user.userId}"></td>
+            <td th:text="${user.name}"></td>
+            <td th:text="${user.username}"></td>
+            <td th:text="${user.role.roleName}"></td>
+            <td th:text="${user.dateAdded}"></td>
+            <td>
+                <button type="button" class="btn btn-success">Edit</button>
+                <button type="button" class="btn btn-danger">Delete</button>
+            </td>
+        </tr>
         </tbody>
     </table>
 </section>
