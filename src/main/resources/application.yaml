@@ -1,0 +1,15 @@
+db:
+  name: user_management
+  user: postgres
+  password: root
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: ${db.user}
+    password: ${db.password}
+    url: jdbc:postgresql://localhost:5432/${db.name}
+
+server:
+  port: 4000
+  servlet:
+    context-path: /user-management
