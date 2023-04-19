@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/head-fragments :: head('Users page')"></head>
+<head th:replace="~{fragments/head-fragments :: head('Users page')}"></head>
 
 <body>
 <header>
-    <nav th:replace="fragments/navbar-fragments :: header-navbar"></nav>
+    <nav th:replace="~{fragments/navbar-fragments :: header-navbar}"></nav>
 </header>
 <section class="container">
     <h1>Users page</h1>
