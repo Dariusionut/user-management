@@ -22,4 +22,9 @@ public class UserServiceImpl implements UserService {
     public List<AppUser> findAllUsers() {
         return userRepository.findAll();
     }
+
+    @Override
+    public void deleteUserById(Long userId) {
+        userRepository.deleteById(userId);
+    }
 }

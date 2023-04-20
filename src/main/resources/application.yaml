@@ -1,7 +1,7 @@
 db:
   name: user_management
-  user: postgres
-  password: dan1981
+  user: postgres # default user
+  password: root
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
