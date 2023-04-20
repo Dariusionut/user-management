@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/head-fragments :: head('Users page')"></head>
+<head th:replace="~{fragments/head-fragments :: head('Users page')}"></head>
 
 <body>
 <header>
-    <nav th:replace="fragments/navbar-fragments :: header-navbar"></nav>
+    <nav th:replace="~{fragments/navbar-fragments :: header-navbar}"></nav>
 </header>
 <section class="container">
     <h1>Users page</h1>
@@ -22,7 +22,7 @@
             <th>Actions</th>
         </tr>
         </thead>
-        <tbody class="table-primary">
+        <tbody class="table-primary shadow-lg p-3 mb-5" >
         <tr th:each="user : ${userList}">
             <td th:text="${user.userId}"></td>
             <td th:text="${user.name}"></td>
