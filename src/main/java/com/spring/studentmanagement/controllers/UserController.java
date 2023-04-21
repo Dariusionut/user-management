@@ -1,12 +1,11 @@
 package com.spring.studentmanagement.controllers;
 
 import com.spring.studentmanagement.models.AppUser;
-import com.spring.studentmanagement.repositories.UserRepository;
+import com.spring.studentmanagement.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,13 +18,19 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserController {
 
-    private final UserRepository userRepository;
-
+    private final UserService userService;
 
     @GetMapping
     public String getUserView(Model model) {
-        final List<AppUser> users = this.userRepository.findAll();
+        final List<AppUser> users = this.userService.findAllUsers();
         model.addAttribute("userList", users);
         return "users";
     }
+
+    @PostMapping("/delete")
+    public String deleteUser(@RequestParam("userId") Long userId) {
+        this.userService.deleteUserById(userId);
+        return "redirect:/users";
+    }
 }
+

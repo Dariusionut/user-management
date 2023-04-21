@@ -1,6 +1,6 @@
 db:
   name: user_management
-  user: postgres
+  user: postgres # default user
   password: root
 spring:
   datasource:
@@ -8,6 +8,13 @@ spring:
     username: ${db.user}
     password: ${db.password}
     url: jdbc:postgresql://localhost:5432/${db.name}
+#  jpa:
+#    show-sql: true
+#    generate-ddl: true
+#    hibernate:
+#      ddl-auto: update
+#    database: postgresql
+
 
 server:
   port: 4000
