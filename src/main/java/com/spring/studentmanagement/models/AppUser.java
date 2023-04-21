@@ -2,10 +2,8 @@ package com.spring.studentmanagement.models;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.Hibernate;
 
 import java.time.LocalDateTime;
-import java.util.Objects;
 
 /**
  * Created at 4/19/2023 by Darius
@@ -30,26 +28,24 @@ public class AppUser {
     @JoinColumn(name = "fk_role", nullable = false)
     private Role role;
 
-    @Column(name = "name", length = 65, nullable = false)
-    private String name;
-    @Column(name = "username", length = 45)
+    @Column(name = "first_name", length = 65, nullable = false)
+    private String firstName;
+
+    @Column(name = "last_name", length = 65, nullable = false)
+    private String lastName;
+
+    @Column(name = "username", length = 45, unique = true, nullable = false)
     private String username;
 
-    @Column(name = "password", length = 100)
+    @Column(name = "password", length = 100, nullable = false)
     private String password;
+
+    @Column(name = "email", length = 65, unique = true, nullable = false)
+    private String email;
+
+    @Column(name = "is_enabled", nullable = false, columnDefinition = "boolean DEFAULT true")
+    private boolean isEnabled;
 
     private LocalDateTime dateAdded;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        AppUser appUser = (AppUser) o;
-        return userId != null && Objects.equals(userId, appUser.userId);
-    }
-
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
-    }
 }

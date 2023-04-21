@@ -13,6 +13,7 @@ import lombok.*;
 @NoArgsConstructor
 @Table(name = "role", schema = "public")
 @Entity(name = "Role")
+@Builder
 @Cacheable
 public class Role {
 
