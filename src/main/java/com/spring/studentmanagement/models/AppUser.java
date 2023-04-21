@@ -32,11 +32,18 @@ public class AppUser {
 
     @Column(name = "name", length = 65, nullable = false)
     private String name;
-    @Column(name = "username", length = 45)
+
+    @Column(name = "username", length = 45, unique = true, nullable = false)
     private String username;
 
-    @Column(name = "password", length = 100)
+    @Column(name = "password", length = 100, nullable = false)
     private String password;
+
+    @Column(name = "email", length = 65, unique = true, nullable = false)
+    private String email;
+
+    @Column(name = "is_enabled", nullable = false, columnDefinition="boolean DEFAULT true")
+    private boolean is_enabled;
 
     private LocalDateTime dateAdded;
 
