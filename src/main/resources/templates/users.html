@@ -15,9 +15,11 @@
         <thead class="table-dark">
         <tr>
             <th>User id</th>
-            <th>Name</th>
+            <th>First name</th>
+            <th>Last name</th>
             <th>Username</th>
             <th>Role name</th>
+            <th>Email</th>
             <th>Date added</th>
             <th>Actions</th>
         </tr>
@@ -25,27 +27,22 @@
         <tbody class="table-primary shadow-lg p-3 mb-5">
         <tr th:each="user : ${userList}">
             <td th:text="${user.userId}"></td>
-            <td th:text="${user.name}"></td>
+            <td th:text="${user.getFirstName}"></td>
+            <td th:text="${user.getLastName}"></td>
             <td th:text="${user.username}"></td>
             <td th:text="${user.role.roleName}"></td>
+            <td th:text="${user.email}"></td>
             <td th:text="${#temporals.format(user.dateAdded, 'dd-MM-yyyy | HH:mm:ss')}"></td>
             <td class="d-flex align-middle justify-content-evenly pe-0 ps-0">
 
-                <form method='post' th:action="@{/users/edit/{id}(id=${user.userId})}" >
-                    <input type="hidden" name="userId" th:value="${user.userId}"/>
-                    <input type="hidden" name="_method" value="delete"/>
-                    <button type="button"
-                            th:attr="data-fullName=${user.name}"
-                            class="btn btn-primary">View
-                    </button>
-                </form>
-                <form method='post' th:action="@{/users}" >
+                <a type="submit" th:href="@{'/users/' + ${user.userId}}" class="btn btn-primary">View</a>
+                <form method='post' th:action="@{/users}">
                     <!-- In the above  case, this refers to the element that triggers the onsubmit event -->
                     <input type="hidden" name="userId" th:value="${user.userId}"/>
                     <input type="hidden" name="_method" value="delete"/>
                     <button type="button"
                             onclick="deleteUserHandler(this)"
-                            th:attr="data-fullName=${user.name}"
+                            th:attr="data-fullName=${user.getFirstName}"
                             class="btn btn-danger">Delete
                     </button>
                 </form>
