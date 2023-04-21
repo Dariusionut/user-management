@@ -3,10 +3,10 @@ spring:
     driver-class-name: org.postgresql.Driver
     username: ${DB_USER} # Read from environment variable
     password: ${DB_PASSWORD} # Read from environment variable
-    url: jdbc:postgresql://localhost:5432/user_management
+    url: ${DB_URL}
   jpa:
     show-sql: true
-    generate-ddl: true
+    generate-ddl: false
     hibernate:
       ddl-auto: validate
     database: postgresql
