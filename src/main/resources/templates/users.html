@@ -35,6 +35,7 @@
                     <form method='post' th:action="@{/users}"
                           th:attr="data-fullName=${user.name}"
                           onsubmit="return deleteUserHandler(this)">
+                        <!-- In the above  case, this refers to the element that triggers the onsubmit event -->
                         <input type="hidden" name="userId" th:value="${user.userId}"/>
                         <input type="hidden" name="_method" value="delete"/>
                         <button type="submit" class="btn btn-danger">Delete</button>
