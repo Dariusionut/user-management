@@ -30,8 +30,11 @@ public class AppUser {
     @JoinColumn(name = "fk_role", nullable = false)
     private Role role;
 
-    @Column(name = "name", length = 65, nullable = false)
-    private String name;
+    @Column(name = "first_name", length = 65, nullable = false)
+    private String first_name;
+
+    @Column(name = "last_name", length = 65, nullable = false)
+    private String last_name;
 
     @Column(name = "username", length = 45, unique = true, nullable = false)
     private String username;
