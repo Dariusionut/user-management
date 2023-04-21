@@ -28,7 +28,7 @@
             <td th:text="${user.name}"></td>
             <td th:text="${user.username}"></td>
             <td th:text="${user.role.roleName}"></td>
-            <td th:text="${user.dateAdded}"></td>
+            <td th:text="${#temporals.format(user.dateAdded, 'dd-MM-yyyy | HH:mm:ss')}"></td>
             <td>
                 <div class="btn-group" role="group">
                     <a th:href="@{/users/edit/{id}(id=${user.userId})}" class="btn btn-success">Edit</a>
