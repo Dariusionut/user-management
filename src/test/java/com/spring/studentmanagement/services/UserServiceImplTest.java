@@ -32,9 +32,9 @@ class UserServiceImplTest {
         List<AppUser> expectedUsers = new ArrayList<>();
         Role role = new Role(1L, "ROLE_ADMIN");
         expectedUsers.add(
-                new AppUser(1L, role, "John Doe", "johndoe", "password123", LocalDateTime.now()));
+                new AppUser(1L, role, "John Doe", "johndoe", "password123", "john@his_email.com", true, LocalDateTime.now()));
         expectedUsers.add(
-                new AppUser(2L, role, "Jane Doe", "janedoe", "password456", LocalDateTime.now()));
+                new AppUser(2L, role, "Jane Doe", "janedoe", "password456", "jane@her_email.com", true, LocalDateTime.now()));
 
         when(userRepository.findAll()).thenReturn(expectedUsers);
 
