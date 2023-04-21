@@ -35,16 +35,8 @@
             <td th:text="${#temporals.format(user.dateAdded, 'dd-MM-yyyy | HH:mm:ss')}"></td>
             <td class="d-flex align-middle justify-content-evenly pe-0 ps-0">
 
-                <form method='post' th:action="@{/users/edit/{id}(id=${user.userId})}" >
-                    <input type="hidden" name="userId" th:value="${user.userId}"/>
-                    <input type="hidden" name="_method" value="delete"/>
-                    <button type="button"
-                            style="border-color: black"
-                            th:attr="data-fullName=${user.getFirstName}"
-                            class="btn btn-primary">View
-                    </button>
-                </form>
-                <form method='post' th:action="@{/users}" >
+                <a type="submit" th:href="@{'/users/' + ${user.userId}}" class="btn btn-primary">View</a>
+                <form method='post' th:action="@{/users}">
                     <!-- In the above  case, this refers to the element that triggers the onsubmit event -->
                     <input type="hidden" name="userId" th:value="${user.userId}"/>
                     <input type="hidden" name="_method" value="delete"/>
