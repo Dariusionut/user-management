@@ -1,7 +1,10 @@
 package com.spring.studentmanagement.services;
 
+import com.spring.studentmanagement.exceptions.UserNotFoundExceptions;
 import com.spring.studentmanagement.models.AppUser;
 import com.spring.studentmanagement.repositories.UserRepository;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,13 +13,11 @@ import java.util.List;
  * Created at 20.04.2023 by Dan.
  */
 @Service
+@RequiredArgsConstructor
+@Slf4j
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-
-    public UserServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
 
     @Override
     public List<AppUser> findAllUsers() {
@@ -29,8 +30,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public AppUser getUserById(Long userId) {
-        return userRepository.getById(userId);
+    public AppUser getUserById(Long userId) throws UserNotFoundExceptions {
+        log.info("Trying to getUserById with param: userId = {}", userId);
+
+        return this.userRepository.findById(userId).orElseThrow(() -> new UserNotFoundExceptions("User not found!"));
+
     }
 }
 

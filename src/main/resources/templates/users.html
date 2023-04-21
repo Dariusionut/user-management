@@ -27,8 +27,8 @@
         <tbody class="table-primary shadow-lg p-3 mb-5">
         <tr th:each="user : ${userList}">
             <td th:text="${user.userId}"></td>
-            <td th:text="${user.first_name}"></td>
-            <td th:text="${user.last_name}"></td>
+            <td th:text="${user.getFirstName}"></td>
+            <td th:text="${user.getLastName}"></td>
             <td th:text="${user.username}"></td>
             <td th:text="${user.role.roleName}"></td>
             <td th:text="${user.email}"></td>
@@ -39,7 +39,8 @@
                     <input type="hidden" name="userId" th:value="${user.userId}"/>
                     <input type="hidden" name="_method" value="delete"/>
                     <button type="button"
-                            th:attr="data-fullName=${user.first_name}"
+                            style="border-color: black"
+                            th:attr="data-fullName=${user.getFirstName}"
                             class="btn btn-primary">View
                     </button>
                 </form>
@@ -49,7 +50,7 @@
                     <input type="hidden" name="_method" value="delete"/>
                     <button type="button"
                             onclick="deleteUserHandler(this)"
-                            th:attr="data-fullName=${user.first_name}"
+                            th:attr="data-fullName=${user.getFirstName}"
                             class="btn btn-danger">Delete
                     </button>
                 </form>
