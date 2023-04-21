@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head-fragments :: head('User profile page')}"><title></title></head>
+
+<body>
+<header>
+    <nav th:replace="~{fragments/navbar-fragments :: header-navbar}"></nav>
+</header>
+<section class="container">
+    <h1 th:text="${user.getFirstName}"></h1>
+    <h2>Profile Page</h2>
+    <hr>
+
+    <h1 class="text-danger">Under construction</h1>
+</section>
+
+<div th:replace="~{fragments/dialogs :: confirm-dialog}"></div>
+
+</body>
+
+</html>
