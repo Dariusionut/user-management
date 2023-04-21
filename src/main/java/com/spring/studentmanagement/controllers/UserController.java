@@ -27,6 +27,14 @@ public class UserController {
         return "users";
     }
 
+    @GetMapping(path = "/{userId}")
+    public String getUserProfile(@RequestParam(name = "userId" , required = false) Long userId, Model model) {
+        AppUser user = this.userService.getUserById(userId);
+        // add user information to the model for rendering in the view
+        model.addAttribute("user", user);
+        return "user";
+    }
+
     @DeleteMapping
     public String deleteUser(@RequestParam("userId") Long userId) {
         this.userService.deleteUserById(userId);
