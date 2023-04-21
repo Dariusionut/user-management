@@ -29,31 +29,35 @@
             <td th:text="${user.username}"></td>
             <td th:text="${user.role.roleName}"></td>
             <td th:text="${#temporals.format(user.dateAdded, 'dd-MM-yyyy | HH:mm:ss')}"></td>
-            <td>
-                <div class="btn-group" role="group">
-                    <a th:href="@{/users/edit/{id}(id=${user.userId})}" class="btn btn-success">Edit</a>
-                    <form method='post' th:action="@{/users}"
-                          th:attr="data-fullName=${user.name}"
-                          onsubmit="return deleteUserHandler(this)">
-                        <!-- In the above  case, this refers to the element that triggers the onsubmit event -->
-                        <input type="hidden" name="userId" th:value="${user.userId}"/>
-                        <input type="hidden" name="_method" value="delete"/>
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </form>
-                </div>
+            <td class="d-flex align-middle justify-content-evenly pe-0 ps-0">
+
+                <form method='post' th:action="@{/users/edit/{id}(id=${user.userId})}" >
+                    <input type="hidden" name="userId" th:value="${user.userId}"/>
+                    <input type="hidden" name="_method" value="delete"/>
+                    <button type="button"
+                            th:attr="data-fullName=${user.name}"
+                            class="btn btn-primary">View
+                    </button>
+                </form>
+                <form method='post' th:action="@{/users}" >
+                    <!-- In the above  case, this refers to the element that triggers the onsubmit event -->
+                    <input type="hidden" name="userId" th:value="${user.userId}"/>
+                    <input type="hidden" name="_method" value="delete"/>
+                    <button type="button"
+                            onclick="deleteUserHandler(this)"
+                            th:attr="data-fullName=${user.name}"
+                            class="btn btn-danger">Delete
+                    </button>
+                </form>
+
             </td>
         </tr>
         </tbody>
     </table>
 </section>
 
-<!--<script th:inline="javascript">-->
+<div th:replace="~{fragments/dialogs :: confirm-dialog}"></div>
 
-<!--    const deleteUserHandler = function (formElement) {-->
-<!--        const fullName = formElement.getAttribute('data-fullName');-->
-<!--        return confirm(`Are you sure to permanently remove ${fullName}?`);-->
-<!--    }-->
-<!--</script>-->
 </body>
 
 </html>
