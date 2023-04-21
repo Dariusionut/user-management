@@ -1,19 +1,19 @@
 package com.spring.studentmanagement.models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 /**
  * Created at 4/19/2023 by Darius
  **/
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "role", schema = "public")
 @Entity(name = "Role")
+@Cacheable
 public class Role {
 
     @Id

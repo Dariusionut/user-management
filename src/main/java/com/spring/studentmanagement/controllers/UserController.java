@@ -27,7 +27,7 @@ public class UserController {
         return "users";
     }
 
-    @PostMapping("/delete")
+    @DeleteMapping
     public String deleteUser(@RequestParam("userId") Long userId) {
         this.userService.deleteUserById(userId);
         return "redirect:/users";
