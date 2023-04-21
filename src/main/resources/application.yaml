@@ -1,22 +1,24 @@
-db:
-  name: user_management
-  user: postgres # default user
-  password: root
-spring:
-  datasource:
-    driver-class-name: org.postgresql.Driver
-    username: ${db.user}
-    password: ${db.password}
-    url: jdbc:postgresql://localhost:5432/${db.name}
-#  jpa:
-#    show-sql: true
-#    generate-ddl: true
-#    hibernate:
-#      ddl-auto: update
-#    database: postgresql
-
-
 server:
   port: 4000
   servlet:
     context-path: /user-management
+  error:
+    path: /error
+    include-binding-errors: always
+    include-exception: true
+spring:
+  config:
+    import:
+      - application-datasource.yaml
+  mvc:
+    hidden-method:
+      filter:
+        enabled: true
+# The above property allow us to define a hidden input inside forms to make delete requests
+# For example: <input type='hidden' name='_method' value='delete'/>
+# Check user page, delete button for a real example. :)
+logging:
+  level:
+    root: INFO
+  file:
+    name: logs/student-management.log
