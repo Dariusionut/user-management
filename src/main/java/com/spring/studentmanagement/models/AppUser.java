@@ -1,20 +1,21 @@
 package com.spring.studentmanagement.models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 /**
  * Created at 4/19/2023 by Darius
  **/
 
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @AllArgsConstructor
-@NoArgsConstructor
 @Builder
 @Table(name = "app_user", schema = "public")
 @Entity(name = "AppUser")
@@ -38,4 +39,17 @@ public class AppUser {
     private String password;
 
     private LocalDateTime dateAdded;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        AppUser appUser = (AppUser) o;
+        return userId != null && Objects.equals(userId, appUser.userId);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

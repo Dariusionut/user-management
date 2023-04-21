@@ -1,23 +1,18 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/head-fragments :: head('Home page')"></head>
+<head th:replace="~{fragments/head-fragments :: head('Home page')}"><title></title></head>
 <body th:with="page='Home page'">
 
 <header>
-    <nav th:replace="fragments/navbar-fragments :: header-navbar"></nav>
+    <nav th:replace="~{fragments/navbar-fragments :: header-navbar}"></nav>
 </header>
 <section class="container">
     <h1 th:text="${page}"></h1>
     <hr>
 
-    <h2>Server details</h2>
-    <p>Server context path: <span th:text="${contextPath}"></span></p>
-    <p>Server port: <span th:text="${serverPort}"></span></p>
-    <hr>
-    <h2>Database details</h2>
-    <p>You are connected to <strong th:text="${dbName}"></strong> database with user: <strong
-            th:text="${dbUsername}"></strong></p>
+    <h2>Page under construction...</h2>
+
 </section>
 
 </body>

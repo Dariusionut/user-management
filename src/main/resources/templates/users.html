@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/head-fragments :: head('Users page')"></head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head-fragments :: head('Users page')}"><title></title></head>
 
 <body>
 <header>
-    <nav th:replace="fragments/navbar-fragments :: header-navbar"></nav>
+    <nav th:replace="~{fragments/navbar-fragments :: header-navbar}"></nav>
 </header>
 <section class="container">
     <h1>Users page</h1>
@@ -22,21 +22,42 @@
             <th>Actions</th>
         </tr>
         </thead>
-        <tbody class="table-primary">
+        <tbody class="table-primary shadow-lg p-3 mb-5">
         <tr th:each="user : ${userList}">
             <td th:text="${user.userId}"></td>
             <td th:text="${user.name}"></td>
             <td th:text="${user.username}"></td>
             <td th:text="${user.role.roleName}"></td>
-            <td th:text="${user.dateAdded}"></td>
-            <td>
-                <button type="button" class="btn btn-success">Edit</button>
-                <button type="button" class="btn btn-danger">Delete</button>
+            <td th:text="${#temporals.format(user.dateAdded, 'dd-MM-yyyy | HH:mm:ss')}"></td>
+            <td class="d-flex align-middle justify-content-evenly pe-0 ps-0">
+
+                <form method='post' th:action="@{/users/edit/{id}(id=${user.userId})}" >
+                    <input type="hidden" name="userId" th:value="${user.userId}"/>
+                    <input type="hidden" name="_method" value="delete"/>
+                    <button type="button"
+                            th:attr="data-fullName=${user.name}"
+                            class="btn btn-primary">View
+                    </button>
+                </form>
+                <form method='post' th:action="@{/users}" >
+                    <!-- In the above  case, this refers to the element that triggers the onsubmit event -->
+                    <input type="hidden" name="userId" th:value="${user.userId}"/>
+                    <input type="hidden" name="_method" value="delete"/>
+                    <button type="button"
+                            onclick="deleteUserHandler(this)"
+                            th:attr="data-fullName=${user.name}"
+                            class="btn btn-danger">Delete
+                    </button>
+                </form>
+
             </td>
         </tr>
         </tbody>
     </table>
 </section>
 
+<div th:replace="~{fragments/dialogs :: confirm-dialog}"></div>
+
 </body>
+
 </html>

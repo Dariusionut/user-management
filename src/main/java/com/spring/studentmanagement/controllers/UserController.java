@@ -5,8 +5,7 @@ import com.spring.studentmanagement.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,6 +25,12 @@ public class UserController {
         final List<AppUser> users = this.userService.findAllUsers();
         model.addAttribute("userList", users);
         return "users";
+    }
+
+    @DeleteMapping
+    public String deleteUser(@RequestParam("userId") Long userId) {
+        this.userService.deleteUserById(userId);
+        return "redirect:/users";
     }
 }
 

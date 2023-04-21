@@ -30,6 +30,16 @@ class UserControllerTest {
     private Model model;
 
     @Test
+    @DisplayName("Should redirect to the users page after deleting the user")
+    void redirectToUsersPageAfterDeletingUser() {
+        Long userId = 1L;
+
+        String result = userController.deleteUser(userId);
+
+        verify(userService, times(1)).deleteUserById(userId);
+        assertEquals("redirect:/users", result);
+    }
+    @Test
     @DisplayName("Should return the user view with a list of all users")
     void getUserViewWithAllUsers() {
         List<AppUser> users =
