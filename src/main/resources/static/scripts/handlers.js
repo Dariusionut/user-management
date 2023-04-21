@@ -2,6 +2,7 @@
 const deleteUserHandler = function (element) {
     const fullName = element.getAttribute('data-fullName');
     const confirmModal = new ConfirmModal('#confirm-operation-modal');
+    confirmModal.title = 'Confirm operation';
     confirmModal.content = `Are you sure to permanently remove ${fullName}?`;
 
     const confirmHandler = function () {
@@ -17,6 +18,7 @@ class ConfirmModal {
 
     modal;
     contentElement;
+    modalTitle;
     confirmBtn;
     cancelBtn;
 
@@ -24,10 +26,15 @@ class ConfirmModal {
         const modalElement = document.querySelector(selector);
         this.modal = new bootstrap.Modal(modalElement);
         this.contentElement = document.getElementById('confirm-modal-message');
+        this.modalTitle = document.getElementById('modal-title');
         this.confirmBtn = document.getElementById('confirm-btn');
         this.cancelBtn = document.getElementById('cancel-btn');
     }
 
+
+    set title(titleString) {
+        this.modalTitle.innerText = titleString;
+    }
 
     set content(contentString) {
         this.contentElement.innerText = contentString;
