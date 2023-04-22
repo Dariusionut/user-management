@@ -2,18 +2,18 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments/head-fragments :: head('Home page')}"><title></title></head>
-<body th:with="page='Home page'">
+<body >
 
-<header>
-    <nav th:replace="~{fragments/navbar-fragments :: header-navbar}"></nav>
-</header>
-<section class="container">
-    <h1 th:text="${page}"></h1>
-    <hr>
 
-    <h2>Page under construction...</h2>
+<div class="container" style="width: 600px; text-align: center; margin-top: 200px;">
 
-</section>
+    <img th:src="@{/images/logo.png}" height="150" alt="user management logo">
+</div>
+<div class="container" style="width: 300px; text-align: center; font-size: xx-large; font-weight: bold;">
+    <a href="users/login" style="float:left; color: darkslategray;">LOGIN</a>
+    <a href="users/register" style="float:right; color: darkslategray;">SIGN UP</a>
+</div>
+
 
 </body>
 </html>
