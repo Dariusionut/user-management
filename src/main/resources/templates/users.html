@@ -14,7 +14,7 @@
     <table class="table table-hover table-striped table-bordered">
         <thead class="table-dark">
         <tr>
-            <th>User id</th>
+            <th>#</th>
             <th>First name</th>
             <th>Last name</th>
             <th>Username</th>
@@ -26,7 +26,7 @@
         </thead>
         <tbody class="table-primary shadow-lg p-3 mb-5">
         <tr th:each="user : ${userList}">
-            <td th:text="${user.userId}"></td>
+            <td th:text="${userStat.index + 1}"></td>
             <td th:text="${user.getFirstName}"></td>
             <td th:text="${user.getLastName}"></td>
             <td th:text="${user.username}"></td>
