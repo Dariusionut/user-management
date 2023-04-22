@@ -36,3 +36,4 @@ logs
 .mvn
 mvnw
 mvnw.cmd
+/.fastRequest/

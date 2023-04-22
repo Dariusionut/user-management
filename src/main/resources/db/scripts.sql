@@ -11,13 +11,18 @@ CREATE TABLE IF NOT EXISTS role
 );
 
 INSERT INTO role(role_id, role_name)
-VALUES (1, 'USER');
-INSERT INTO role(role_id, role_name)
-VALUES (2, 'VISITOR');
-INSERT INTO role(role_id, role_name)
-VALUES (3, 'ADMIN');
+VALUES (1, 'USER')
+ON CONFLICT (role_id) DO NOTHING;
 
-CREATE SEQUENCE seq_app_user;
+INSERT INTO role(role_id, role_name)
+VALUES (2, 'VISITOR')
+ON CONFLICT (role_id) DO NOTHING;
+
+INSERT INTO role(role_id, role_name)
+VALUES (3, 'ADMIN')
+ON CONFLICT (role_id) DO NOTHING;
+
+CREATE SEQUENCE if not exists seq_app_user;
 CREATE TABLE IF NOT EXISTS app_user
 (
     user_id    BIGINT UNIQUE NOT NULL DEFAULT nextval('seq_app_user'),
