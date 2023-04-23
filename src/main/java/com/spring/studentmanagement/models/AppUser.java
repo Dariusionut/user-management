@@ -28,6 +28,10 @@ public class AppUser {
     @JoinColumn(name = "fk_role", nullable = false)
     private Role role;
 
+    @OneToOne(targetEntity = Address.class, fetch = FetchType.EAGER)
+    @JoinColumn(name = "fk_address")
+    private Address address;
+
     @Column(name = "first_name", length = 65, nullable = false)
     private String firstName;
 
@@ -45,10 +49,6 @@ public class AppUser {
 
     @Column(name = "is_enabled", nullable = false, columnDefinition = "boolean DEFAULT true")
     private boolean isEnabled;
-
-    @OneToOne(targetEntity = Address.class, fetch = FetchType.EAGER)
-    @JoinColumn(name = "fk_address",nullable = false)
-    private Address address;
 
     private LocalDateTime dateAdded;
 
