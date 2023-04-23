@@ -1,0 +1,18 @@
+server:
+  port: 4000
+  error:
+    include-binding-errors: always
+    include-exception: true
+spring:
+  datasource:
+    username: postgres # Read from environment variable
+    password: root # Read from environment variable
+    url: jdbc:postgresql://localhost:5432/user_management
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        format_sql: true
