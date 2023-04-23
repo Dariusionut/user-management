@@ -88,7 +88,12 @@
             <artifactId>bootstrap</artifactId>
             <version>${webjar-bootstrap-version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>test</scope> <!--- Ignore this vulnerability-->
+            <version>2.1.214</version>
+        </dependency>
     </dependencies>
 
     <profiles>
@@ -99,18 +104,26 @@
             </activation>
         </profile>
         <profile>
+            <id>local</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
-            <id>local</id>
         </profile>
         <profile>
+            <id>test</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
             </activation>
-            <id>test</id>
+            <dependencies>
+                <dependency>
+                    <groupId>com.h2database</groupId>
+                    <artifactId>h2</artifactId>
+                    <scope>test</scope>
+                </dependency>
+            </dependencies>
         </profile>
     </profiles>
+
     <build>
         <finalName>${project.name}</finalName>
         <plugins>

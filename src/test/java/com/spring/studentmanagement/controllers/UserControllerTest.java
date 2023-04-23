@@ -1,5 +1,6 @@
 package com.spring.studentmanagement.controllers;
 
+import com.spring.studentmanagement.StudentManagementTest;
 import com.spring.studentmanagement.models.AppUser;
 import com.spring.studentmanagement.services.UserService;
 import org.junit.jupiter.api.DisplayName;
@@ -17,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class UserControllerTest {
+class UserControllerTest implements StudentManagementTest {
 
     @Mock
     private UserService userService;
@@ -38,6 +39,7 @@ class UserControllerTest {
         verify(userService, times(1)).deleteUserById(userId);
         assertEquals("redirect:/users", result);
     }
+
     @Test
     @DisplayName("Should return the user view with a list of all users")
     void getUserViewWithAllUsers() {

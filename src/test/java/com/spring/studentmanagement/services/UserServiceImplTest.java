@@ -1,5 +1,6 @@
 package com.spring.studentmanagement.services;
 
+import com.spring.studentmanagement.StudentManagementTest;
 import com.spring.studentmanagement.models.AppUser;
 import com.spring.studentmanagement.repositories.UserRepository;
 import org.junit.jupiter.api.DisplayName;
@@ -16,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class UserServiceImplTest {
+class UserServiceImplTest implements StudentManagementTest {
 
     @Mock
     private UserRepository userRepository;
