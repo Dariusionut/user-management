@@ -2,7 +2,7 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments/head-fragments :: head('Home page')}"><title></title></head>
-<body >
+<body>
 
 
 <div class="container" style="width: 600px; text-align: center; margin-top: 200px;">
@@ -10,8 +10,8 @@
     <img th:src="@{/images/logo.png}" height="150" alt="user management logo">
 </div>
 <div class="container" style="width: 300px; text-align: center; font-size: xx-large; font-weight: bold;">
-    <a href="users/login" style="float:left; color: darkslategray;">LOGIN</a>
-    <a href="users/register" style="float:right; color: darkslategray;">SIGN UP</a>
+    <a th:href="@{/login}" style="float:left; color: darkslategray;">LOGIN</a>
+    <a th:href="@{/register}" style="float:right; color: darkslategray;">SIGN UP</a>
 </div>
 
 
