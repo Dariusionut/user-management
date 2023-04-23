@@ -29,7 +29,8 @@ public class AppUser {
     @JoinColumn(
             name = "fk_role",
             nullable = false,
-            columnDefinition = "BIGINT DEFAULT 1"
+            columnDefinition = "BIGINT DEFAULT 1",
+            foreignKey = @ForeignKey(name = "app_user_fk_role")
     )
     private Role role;
 
