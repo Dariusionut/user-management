@@ -9,8 +9,8 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
-@RequiredArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 @Table(name = "address", schema = "public")
 @Entity(name = "Address")
@@ -30,7 +30,7 @@ public class Address {
     @Column(name = "door_number", length = 10, nullable = false)
     private String doorNumber;
 
-    @Column(name = "additional_details")
+    @Column(name = "additional_details", length = 65)
     private String additionalDetails;
 
     @OneToOne(mappedBy = "address")
