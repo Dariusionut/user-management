@@ -45,5 +45,8 @@ public class UserController {
         this.userService.deleteUserById(userId);
         return "redirect:/users";
     }
+
+
+
 }
 
