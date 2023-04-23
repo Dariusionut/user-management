@@ -45,5 +45,10 @@ public class UserController {
         this.userService.deleteUserById(userId);
         return "redirect:/users";
     }
+
+    @GetMapping("/login")
+    public String showLoginPage() {
+        return "login";
+    }
 }
 
