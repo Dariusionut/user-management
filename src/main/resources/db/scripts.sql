@@ -54,6 +54,8 @@ VALUES ('Elena', 'Tintiri', 'ElenaUser', 'pass123', 'elena@email.com');
 INSERT INTO app_user(fk_role, first_name, last_name, username, password, email)
 VALUES (2, 'David', 'Beckham', 'DavUser', 'pass123', 'david@email.com');
 
+CREATE SEQUENCE IF NOT EXISTS seq_address;
+
 CREATE TABLE IF NOT EXISTS address
 (
     id                 BIGINT      NOT NULL DEFAULT NEXTVAL('seq_address'),
@@ -63,7 +65,7 @@ CREATE TABLE IF NOT EXISTS address
     additional_details VARCHAR(65) NULL,
     PRIMARY KEY (id)
 );
-CREATE SEQUENCE IF NOT EXISTS seq_address;
+
 
 ALTER TABLE app_user
     ADD COLUMN fk_address BIGINT UNIQUE,
