@@ -18,6 +18,11 @@ public class HomeController {
         return "index";
     }
 
+    @GetMapping("/login")
+    public String showLoginPage() {
+        return "login";
+    }
+
     @GetMapping(path = "/register")
     public String registerUser() {
         return "register";
