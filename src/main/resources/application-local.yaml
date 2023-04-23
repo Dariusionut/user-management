@@ -1,6 +1,10 @@
+server:
+  port: 4000
+  error:
+    include-binding-errors: always
+    include-exception: true
 spring:
   datasource:
-    driver-class-name: org.postgresql.Driver
     username: ${DB_USER} # Read from environment variable
     password: ${DB_PASSWORD} # Read from environment variable
     url: ${DB_URL}
@@ -9,12 +13,14 @@ spring:
     generate-ddl: false
     hibernate:
       ddl-auto: validate
-    database: postgresql
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
     properties:
       hibernate:
         format_sql: false
-        dialect: ${spring.jpa.database-platform}
+
 logging:
   level:
+    root: INFO
     org.hibernate.sql: DEBUG
+    org.thymeleaf.web: DEBUG
+  file:
+    name: logs/student-management.log

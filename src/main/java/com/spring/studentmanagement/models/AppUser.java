@@ -22,14 +22,24 @@ public class AppUser {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_app_user")
     @SequenceGenerator(name = "seq_app_user", allocationSize = 1)
+    @Column(name = "user_id", columnDefinition = "BIGINT NOT NULL DEFAULT NEXTVAL('seq_app_user')")
     private Long userId;
 
     @ManyToOne(targetEntity = Role.class, fetch = FetchType.EAGER)
-    @JoinColumn(name = "fk_role", nullable = false)
+    @JoinColumn(
+            name = "fk_role",
+            nullable = false,
+            columnDefinition = "BIGINT DEFAULT 1",
+            foreignKey = @ForeignKey(name = "app_user_fk_role")
+    )
     private Role role;
 
     @OneToOne(targetEntity = Address.class, fetch = FetchType.EAGER)
-    @JoinColumn(name = "fk_address")
+    @JoinColumn(
+            name = "fk_address",
+            columnDefinition = "BIGINT NULL",
+            foreignKey = @ForeignKey(name = "app_user_fk_address")
+    )
     private Address address;
 
     @Column(name = "first_name", length = 65, nullable = false)
@@ -50,6 +60,7 @@ public class AppUser {
     @Column(name = "is_enabled", nullable = false, columnDefinition = "boolean DEFAULT true")
     private boolean isEnabled;
 
+    @Column(name = "date_added", nullable = false, columnDefinition = "TIMESTAMP DEFAULT NOW()")
     private LocalDateTime dateAdded;
 
 }

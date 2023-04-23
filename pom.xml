@@ -20,6 +20,7 @@
         <snakeyaml-version>2.0</snakeyaml-version>
         <webjar-bootstrap-version>5.2.3</webjar-bootstrap-version>
         <apache-maven-plugins-version>3.1.0</apache-maven-plugins-version>
+        <h2-database-version>2.1.214</h2-database-version>
     </properties>
     <dependencies>
         <dependency>
@@ -88,8 +89,41 @@
             <artifactId>bootstrap</artifactId>
             <version>${webjar-bootstrap-version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>test</scope> <!--- Ignore this vulnerability-->
+            <version>${h2-database-version}</version>
+        </dependency>
     </dependencies>
+
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>local</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>test</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>com.h2database</groupId>
+                    <artifactId>h2</artifactId>
+                    <scope>test</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
 
     <build>
         <finalName>${project.name}</finalName>
