@@ -46,6 +46,10 @@ public class AppUser {
     @Column(name = "is_enabled", nullable = false, columnDefinition = "boolean DEFAULT true")
     private boolean isEnabled;
 
+    @OneToOne(targetEntity = Address.class, fetch = FetchType.EAGER)
+    @JoinColumn(name = "fk_address",nullable = false)
+    private Address address;
+
     private LocalDateTime dateAdded;
 
 }
