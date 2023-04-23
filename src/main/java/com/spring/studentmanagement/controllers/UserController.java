@@ -46,9 +46,6 @@ public class UserController {
         return "redirect:/users";
     }
 
-    @GetMapping(path = "/register")
-    public String registerUser() {
-        return "register";
-    }
+
 }
 

@@ -17,4 +17,9 @@ public class HomeController {
 
         return "index";
     }
+
+    @GetMapping(path = "/register")
+    public String registerUser() {
+        return "register";
+    }
 }
