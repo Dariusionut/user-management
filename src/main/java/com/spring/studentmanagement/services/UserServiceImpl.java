@@ -3,6 +3,7 @@ package com.spring.studentmanagement.services;
 import com.spring.studentmanagement.exceptions.UserNotFoundExceptions;
 import com.spring.studentmanagement.models.AppUser;
 import com.spring.studentmanagement.repositories.UserRepository;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import java.util.List;
  */
 @Service
 @Slf4j
+@Data
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
