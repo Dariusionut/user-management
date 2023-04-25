@@ -27,8 +27,13 @@ public class AppAuthenticationManagerImpl implements AppAuthManager {
         final AppUser user = this.userRepository.findBYUsernameOrEmail(request.usernameOrEmail())
                 .orElseThrow(() -> new AuthenticationException("User not found!"));
 
-        final String rawPassword = request.password();
+        this.validateAuthentication(request.password(), user);
 
+        return user;
+
+    }
+
+    private void validateAuthentication(String rawPassword, AppUser user) {
         boolean passwordMatch = this.encoder.matches(rawPassword, user.getPassword());
 
         if (!passwordMatch) {
@@ -38,8 +43,5 @@ public class AppAuthenticationManagerImpl implements AppAuthManager {
         if (!user.isEnabled()) {
             throw new AuthenticationException("Account is disabled!");
         }
-
-        return user;
-
     }
 }
