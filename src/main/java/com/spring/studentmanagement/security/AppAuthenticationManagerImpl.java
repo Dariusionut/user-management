@@ -6,6 +6,7 @@ import com.spring.studentmanagement.models.AppUser;
 import com.spring.studentmanagement.repositories.UserRepository;
 import com.spring.studentmanagement.security.utils.Security;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -31,8 +32,8 @@ public class AppAuthenticationManagerImpl implements AppAuthManager, HandlerInte
                 .orElseThrow(() -> new AuthenticationException(USERNAME_NOT_FOUND));
 
         this.validateAuthentication(loginRequest.password(), user);
-        request.setAttribute("userPrincipal", user);
-
+        final HttpSession session = request.getSession();
+        session.setAttribute("userPrincipal", user);
         return user;
 
     }

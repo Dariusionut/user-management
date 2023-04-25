@@ -3,7 +3,9 @@ package com.spring.studentmanagement.controllers;
 import com.spring.studentmanagement.exceptions.UserNotFoundException;
 import com.spring.studentmanagement.models.AppUser;
 import com.spring.studentmanagement.services.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,9 +19,11 @@ import java.util.List;
 @Controller
 @RequestMapping(path = "/users")
 @RequiredArgsConstructor
+@Slf4j
 public class UserController {
 
     private final UserService userService;
+    private final HttpServletRequest request;
 
     @GetMapping
     public String getUserView(Model model) {
@@ -30,6 +34,7 @@ public class UserController {
 
     @GetMapping(path = "/{userId}")
     public String getUserProfile(@PathVariable(name = "userId", required = false) Long userId, Model model) {
+        log.info("principal =   {} ", request.getSession().getAttribute("userPrincipal"));
         try {
             AppUser user = this.userService.getUserById(userId);
             // add user information to the model for rendering in the view
@@ -45,7 +50,6 @@ public class UserController {
         this.userService.deleteUserById(userId);
         return "redirect:/users";
     }
-
 
 
 }
