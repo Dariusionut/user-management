@@ -61,14 +61,6 @@ jobs:
         with:
           languages: javascript
 
-      - name: Install Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '16'
-
-      - name: Install dependencies
-        run: npm install
-
       - name: Perform CodeQL Analysis for JavaScript
         uses: github/codeql-action/analyze@v2
         with:
@@ -76,7 +68,7 @@ jobs:
           database: ./codeql-database-javascript
           sarif-file: ./codeql-results-javascript.sarif
           properties: >
-            input=src/**/*.js
+            input=src/main/resources/static/scripts/*.js
 
   deploy:
     name: Deploy
