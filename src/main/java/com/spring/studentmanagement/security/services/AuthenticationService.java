@@ -1,18 +1,18 @@
-package com.spring.studentmanagement.services;
+package com.spring.studentmanagement.security.services;
 
 import com.spring.studentmanagement.controllers.requests.LoginRequest;
 import com.spring.studentmanagement.exceptions.AuthenticationException;
 import com.spring.studentmanagement.models.AppUser;
 import com.spring.studentmanagement.repositories.UserRepository;
+import com.spring.studentmanagement.security.utils.SecurityService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
 
 /**
  * Created at 4/25/2023 by Darius
  **/
-@Service
+@SecurityService
 @RequiredArgsConstructor
 @Slf4j
 public class AuthenticationService implements AppAuthManager {

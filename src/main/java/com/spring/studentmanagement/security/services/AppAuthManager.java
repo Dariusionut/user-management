@@ -1,4 +1,4 @@
-package com.spring.studentmanagement.services;
+package com.spring.studentmanagement.security.services;
 
 import com.spring.studentmanagement.controllers.requests.LoginRequest;
 import com.spring.studentmanagement.models.AppUser;
