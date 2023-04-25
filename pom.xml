@@ -155,18 +155,6 @@
                     </excludes>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>com.github.javaparser</groupId>
-                <artifactId>javaparser-symbol-solver-core</artifactId>
-                <version>3.22.0</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>generate-ql</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
         </plugins>
     </build>
 

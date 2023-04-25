@@ -2,9 +2,8 @@ name: "CodeQL"
 
 on:
   push:
-    branches: [ "main", develop ]
+    branches: [ "main", "develop" ]
   pull_request:
-    # The branches below must be a subset of the branches above
     branches: [ "main", "develop" ]
   schedule:
     - cron: '31 12 * * 5'
@@ -12,7 +11,6 @@ on:
 jobs:
   analyze:
     name: Analyze
-    #    runs-on: ${{ (matrix.language == 'swift' && 'macos-latest') || 'ubuntu-latest' }}
     runs-on: ${{ (matrix.language == 'java' && 'ubuntu-latest') || 'macos-latest' }}
     permissions:
       actions: read
@@ -26,18 +24,26 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
 
       # Initializes the CodeQL tools for scanning.
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v2
         with:
           languages: ${{ matrix.language }}
-      - name: Build User management application
-        #        uses: github/codeql-action/autobuild@v2
+
+      - name: Build UserManagement application
         run: mvn clean package
+
+      # Autobuild is not needed for Java
+      # ...
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v2
         with:
-          category: "/language:${{matrix.language}}"
+          queries: codeql-suites/java-security-and-quality.qls
+          database: ./codeql-database
+          sarif-file: ./codeql-results.sarif
+          properties: >
+            input=src/main/java/com/spring/studentmanagement/controllers/**/*.java
+            additionalClasspath=target/UserManagement-1.
