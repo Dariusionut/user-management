@@ -9,51 +9,80 @@ on:
     - cron: '31 12 * * 5'
 
 jobs:
-  analyze:
-    name: Analyze
-    runs-on: ${{ (matrix.language == 'java' && 'ubuntu-latest') || 'macos-latest' }}
+  analyze-java:
+    name: Analyze Java
+    runs-on: ubuntu-latest
     permissions:
       actions: read
       contents: read
       security-events: write
 
-    strategy:
-      fail-fast: false
-      matrix:
-        language: [ 'java', 'javascript' ]
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      # Initializes the CodeQL tools for scanning.
-      - name: Initialize CodeQL
+      - name: Initialize CodeQL for Java
         uses: github/codeql-action/init@v2
         with:
-          languages: ${{ matrix.language }}
+          languages: java
 
       - name: Set up Java JDK 17
         uses: actions/setup-java@v1
         with:
           java-version: 17
+
       - name: Build UserManagement application
         run: mvn clean package
 
-      # Autobuild is not needed for Java
-      # ...
-
-      - name: Perform CodeQL Analysis
+      - name: Perform CodeQL Analysis for Java
         uses: github/codeql-action/analyze@v2
         with:
           queries: codeql-suites/java-security-and-quality.qls
-          database: ./codeql-database
-          sarif-file: ./codeql-results.sarif
+          database: ./codeql-database-java
+          sarif-file: ./codeql-results-java.sarif
           properties: >
             input=src/main/java/com/spring/studentmanagement/controllers/**/*.java
             additionalClasspath=target/UserManagement-1.
+
+  analyze-javascript:
+    name: Analyze JavaScript
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Initialize CodeQL for JavaScript
+        uses: github/codeql-action/init@v2
+        with:
+          languages: javascript
+
+      - name: Install Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Perform CodeQL Analysis for JavaScript
+        uses: github/codeql-action/analyze@v2
+        with:
+          queries: codeql-suites/javascript-security-and-quality.qls
+          database: ./codeql-database-javascript
+          sarif-file: ./codeql-results-javascript.sarif
+          properties: >
+            input=src/**/*.js
+
   deploy:
     name: Deploy
-    needs: analyze
+    needs:
+      - analyze-java
+      - analyze-javascript
     runs-on: ubuntu-latest
     steps:
       - name: Display deployment status...
