@@ -42,7 +42,7 @@ public class AuthController {
             redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
             return "redirect:/errors/error-401";
         } catch (Exception e) {
-            log.error("Internal server error occurred");
+            log.error("Internal server error occurred", e);
             redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
             return "redirect:/errors/error-500";
         }
