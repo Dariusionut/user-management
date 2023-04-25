@@ -3,6 +3,7 @@ package com.spring.studentmanagement.security;
 import com.spring.studentmanagement.controllers.requests.LoginRequest;
 import com.spring.studentmanagement.exceptions.AuthenticationException;
 import com.spring.studentmanagement.models.AppUser;
+import com.spring.studentmanagement.security.interfaces.AppAuthManager;
 import com.spring.studentmanagement.security.utils.Security;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -25,8 +26,6 @@ public class AppAuthenticationManagerImpl implements AppAuthManager, HandlerInte
 
     @Override
     public AppUser authenticate(LoginRequest loginRequest) throws AuthenticationException {
-        log.info("Authentication process started....");
-
         final AppUser user = this.userDetailsService.loadByUsernameOrEmail(loginRequest.usernameOrEmail());
         this.validateAuthentication(loginRequest.password(), user);
         final HttpSession session = request.getSession();

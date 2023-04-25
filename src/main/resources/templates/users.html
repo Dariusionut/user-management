@@ -8,6 +8,10 @@
     <nav th:replace="~{fragments/navbar-fragments :: header-navbar}"></nav>
 </header>
 <section class="container">
+
+    <div>
+        <h3>Hello, <span th:text="${principal.firstName + ' ' + principal.lastName}"></span></h3>
+    </div>
     <h1>Users page</h1>
     <hr>
 

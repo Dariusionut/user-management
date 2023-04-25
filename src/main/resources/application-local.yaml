@@ -24,3 +24,6 @@ logging:
     org.thymeleaf.web: DEBUG
   file:
     name: logs/student-management.log
+
+security:
+  enabled: false

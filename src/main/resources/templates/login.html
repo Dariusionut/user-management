@@ -4,10 +4,13 @@
 <head th:replace="~{fragments/head-fragments :: head('User profile page')}"><title></title></head>
 
 <body>
-<header>
-    <nav th:replace="~{fragments/navbar-fragments :: header-navbar}"></nav>
-</header>
 <section class="container" style="width: 400px; margin-top: 40px;">
+
+    <h1 th:if="${registerStatusMsg != null}"
+        th:text="${registerStatusMsg}"
+        style="position: absolute; bottom: 50px; left: 50%; transform: translateX(-50%); color: darkgreen"
+    >
+    </h1>
     <form th:action="@{/auth/login}"
           method="post"
           th:method="post"
@@ -46,9 +49,12 @@
             </div>
         </div>
 
-        <div class="text-center">
+        <div class="btn-toolbar">
             <!-- Submit button -->
-            <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
+            <div class="btn-group">
+                <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
+                <a th:href="@{/auth/register}" class="btn btn-success btn-block mb-4">New account</a>
+            </div>
         </div>
 
 
