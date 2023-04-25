@@ -8,5 +8,9 @@ import com.spring.studentmanagement.models.AppUser;
  * Created at 4/25/2023 by Darius
  **/
 public interface AppAuthManager {
+    String USERNAME_NOT_FOUND = "Username not found";
+    String INVALID_CREDENTIALS = "Invalid credentials";
+    String ACCOUNT_DISABLED = "Account is disabled";
+
     AppUser authenticate(LoginRequest loginRequest) throws AuthenticationException;
 }
