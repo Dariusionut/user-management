@@ -35,9 +35,9 @@ public class ErrorController {
             produces = TEXT_HTML_VALUE,
             headers = {ACCEPT, ACCEPT_ENCODING, ACCEPT_LANGUAGE, CACHE_CONTROL, CONNECTION, HOST, REFERER, USER_AGENT}
     )
-    @ResponseStatus(value = HttpStatus.UNAUTHORIZED)
+    @ResponseStatus(value = HttpStatus.FORBIDDEN)
     public String getAuthenticationErrorView(Model model) {
-        model.addAttribute("errorTitle", "Authentication error");
+        model.addAttribute("errorTitle", "No access rights to the content");
         return "error-403";
     }
 }
