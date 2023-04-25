@@ -25,4 +25,9 @@ public class HomeController {
     public String registerUser() {
         return "register";
     }
+
+    @GetMapping(path = "/terms")
+    public String termsOfService() {
+        return "terms";
+    }
 }
