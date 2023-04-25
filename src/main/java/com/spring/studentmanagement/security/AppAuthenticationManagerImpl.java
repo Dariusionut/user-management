@@ -20,6 +20,7 @@ public class AppAuthenticationManagerImpl implements AppAuthManager {
     private final UserRepository userRepository;
     private final PasswordEncoder encoder;
 
+    @Override
     public AppUser authenticate(LoginRequest request) {
         log.info("Trying to authenticate");
 
