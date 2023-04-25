@@ -32,6 +32,7 @@ public class AuthController {
      */
     @PostMapping(path = "/login")
     public String authenticate(RedirectAttributes redirectAttributes) {
+        log.info("User with ip address = {} is trying to authenticate", this.request.getRemoteAddr());
         final LoginRequest loginRequest = LoginRequest.getLoginRequest(request);
         try {
             final AppUser user = this.authenticationManager.authenticate(loginRequest);
