@@ -22,7 +22,7 @@ public class AppAuthenticationManagerImpl implements AppAuthManager {
 
     @Override
     public AppUser authenticate(LoginRequest request) throws AuthenticationException {
-        log.info("Trying to authenticate");
+        log.info("Authentication process started....");
 
         final AppUser user = this.userRepository.findBYUsernameOrEmail(request.usernameOrEmail())
                 .orElseThrow(() -> new AuthenticationException(USERNAME_NOT_FOUND));
