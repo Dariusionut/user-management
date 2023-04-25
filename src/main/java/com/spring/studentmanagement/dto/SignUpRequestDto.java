@@ -19,6 +19,8 @@ public class SignUpRequestDto {
     private String lastName;
     private long roleId;
 
+    private boolean is_enabled;
+
     public boolean passwordMatches() throws NullPointerException {
         return this.password.equals(this.confirmPassword);
     }
@@ -32,7 +34,9 @@ public class SignUpRequestDto {
                 .firstName(this.firstName)
                 .lastName(this.lastName)
                 .role(role)
+                .isEnabled(true)
                 .build();
+
     }
 
 }
