@@ -3,7 +3,6 @@ package com.spring.studentmanagement.security;
 import com.spring.studentmanagement.controllers.requests.LoginRequest;
 import com.spring.studentmanagement.exceptions.AuthenticationException;
 import com.spring.studentmanagement.models.AppUser;
-import com.spring.studentmanagement.repositories.UserRepository;
 import com.spring.studentmanagement.security.utils.Security;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -20,7 +19,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 @Slf4j
 public class AppAuthenticationManagerImpl implements AppAuthManager, HandlerInterceptor {
 
-    private final UserRepository userRepository;
+    private final UserDetailsServiceImpls userDetailsService;
     private final PasswordEncoder encoder;
     private final HttpServletRequest request;
 
@@ -28,9 +27,7 @@ public class AppAuthenticationManagerImpl implements AppAuthManager, HandlerInte
     public AppUser authenticate(LoginRequest loginRequest) throws AuthenticationException {
         log.info("Authentication process started....");
 
-        final AppUser user = this.userRepository.findBYUsernameOrEmail(loginRequest.usernameOrEmail())
-                .orElseThrow(() -> new AuthenticationException(USERNAME_NOT_FOUND));
-
+        final AppUser user = this.userDetailsService.loadByUsernameOrEmail(loginRequest.usernameOrEmail());
         this.validateAuthentication(loginRequest.password(), user);
         final HttpSession session = request.getSession();
         session.setAttribute("userPrincipal", user);
