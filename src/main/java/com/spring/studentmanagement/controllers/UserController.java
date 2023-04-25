@@ -6,12 +6,14 @@ import com.spring.studentmanagement.services.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+
 
 /**
  * Created at 4/19/2023 by Darius
@@ -52,11 +54,18 @@ public class UserController {
         return "redirect:/users";
     }
 
-    @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping
-    public String create(@RequestBody AppUser user) {
-        this.userService.saveUser(user);
-        return "redirect:/login";
+
+    @PostMapping(path = "/register")
+    public ResponseEntity<?> registerUser(@RequestBody AppUser user) {
+        log.info("Starting to save new user" + user);
+        try {
+            AppUser savedUser =this.userService.saveUser(user);
+            log.info("New user registered: {}", savedUser.getUsername());
+            return ResponseEntity.status(HttpStatus.CREATED).body(savedUser);
+        } catch (DataAccessException ex) {
+            log.info("Failed to register user: {}", user.getUsername(), ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
 
