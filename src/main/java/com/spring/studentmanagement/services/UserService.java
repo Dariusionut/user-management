@@ -1,6 +1,6 @@
 package com.spring.studentmanagement.services;
 
-import com.spring.studentmanagement.exceptions.UserNotFoundExceptions;
+import com.spring.studentmanagement.exceptions.UserNotFoundException;
 import com.spring.studentmanagement.models.AppUser;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,7 +15,7 @@ public interface UserService {
 
     void deleteUserById(Long userId);
 
-    AppUser getUserById(Long userId) throws UserNotFoundExceptions;
+    AppUser getUserById(Long userId) throws UserNotFoundException;
 
     AppUser saveUser(AppUser user);
 }

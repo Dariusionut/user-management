@@ -8,11 +8,11 @@ import java.io.Serial;
  * Created at 4/21/2023 by Darius
  **/
 @Slf4j
-public class UserNotFoundExceptions extends Exception {
+public class UserNotFoundException extends Exception {
     @Serial
     private static final long serialVersionUID = 5033372735590934502L;
 
-    public UserNotFoundExceptions(String message) {
+    public UserNotFoundException(String message) {
         super(message);
         log.error(message);
     }

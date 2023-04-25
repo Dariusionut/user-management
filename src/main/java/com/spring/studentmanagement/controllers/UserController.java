@@ -1,6 +1,6 @@
 package com.spring.studentmanagement.controllers;
 
-import com.spring.studentmanagement.exceptions.UserNotFoundExceptions;
+import com.spring.studentmanagement.exceptions.UserNotFoundException;
 import com.spring.studentmanagement.models.AppUser;
 import com.spring.studentmanagement.services.UserService;
 import lombok.RequiredArgsConstructor;
@@ -35,7 +35,7 @@ public class UserController {
             // add user information to the model for rendering in the view
             model.addAttribute("user", user);
             return "user";
-        } catch (UserNotFoundExceptions e) {
+        } catch (UserNotFoundException e) {
             return "redirect:/error";
         }
     }
