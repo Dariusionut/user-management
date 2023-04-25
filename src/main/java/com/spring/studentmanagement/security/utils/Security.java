@@ -1,7 +1,7 @@
 package com.spring.studentmanagement.security.utils;
 
 import org.springframework.core.annotation.AliasFor;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -11,13 +11,13 @@ import java.lang.annotation.Target;
 /**
  * Created at 4/25/2023 by Darius
  **/
-@Service
+@Component
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface SecurityService {
+public @interface Security {
 
     @AliasFor(
-            annotation = Service.class
+            annotation = Component.class
     )
     String value() default "";
 }
