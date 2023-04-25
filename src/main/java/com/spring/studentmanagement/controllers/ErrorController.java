@@ -29,4 +29,15 @@ public class ErrorController {
         model.addAttribute("errorTitle", "Unauthorized");
         return "errors/error-401";
     }
+
+    @GetMapping(
+            path = "/error-403",
+            produces = TEXT_HTML_VALUE,
+            headers = {ACCEPT, ACCEPT_ENCODING, ACCEPT_LANGUAGE, CACHE_CONTROL, CONNECTION, HOST, REFERER, USER_AGENT}
+    )
+    @ResponseStatus(value = HttpStatus.UNAUTHORIZED)
+    public String getAuthenticationErrorView(Model model) {
+        model.addAttribute("errorTitle", "Authentication error");
+        return "error-403";
+    }
 }
