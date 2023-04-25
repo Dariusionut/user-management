@@ -19,7 +19,6 @@ public class SignUpRequestDto {
     private String lastName;
     private long roleId;
 
-    private boolean is_enabled;
 
     public boolean passwordMatches() throws NullPointerException {
         return this.password.equals(this.confirmPassword);
