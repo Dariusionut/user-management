@@ -1,6 +1,5 @@
 package com.spring.studentmanagement.controllers;
 
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -9,8 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import static org.springframework.http.HttpHeaders.*;
-import static org.springframework.http.MediaType.*;
+import static org.springframework.http.MediaType.TEXT_HTML_VALUE;
 
 /**
  * Created at 4/25/2023 by Darius
@@ -23,32 +21,28 @@ public class ErrorController {
 
     @GetMapping(
             path = "/error-401",
-            produces = TEXT_HTML_VALUE,
-            headers = {ACCEPT, ACCEPT_ENCODING, ACCEPT_LANGUAGE, CACHE_CONTROL, CONNECTION, HOST, REFERER, USER_AGENT}
+            produces = TEXT_HTML_VALUE
     )
     @ResponseStatus(value = HttpStatus.UNAUTHORIZED)
     public String getUnauthorizedView(Model model) {
         model.addAttribute("errorTitle", "Unauthorized");
+        model.addAttribute("errorMessage", "You are not authorized!");
         return "errors/error-401";
     }
 
     @GetMapping(
             path = "/error-403",
-            produces = TEXT_HTML_VALUE,
-            headers = {ACCEPT, ACCEPT_ENCODING, ACCEPT_LANGUAGE, CACHE_CONTROL, CONNECTION, HOST, REFERER, USER_AGENT}
+            produces = TEXT_HTML_VALUE
     )
     @ResponseStatus(value = HttpStatus.FORBIDDEN)
     public String getAuthenticationErrorView(Model model) {
         model.addAttribute("errorTitle", "No access rights to the content");
-        return "error-403";
+        return "/errors/error-403";
     }
 
     @GetMapping(
             path = "/error-500",
-            produces = MediaType.TEXT_HTML_VALUE,
-            headers = {HttpHeaders.ACCEPT, HttpHeaders.ACCEPT_ENCODING, HttpHeaders.ACCEPT_LANGUAGE,
-                    HttpHeaders.CACHE_CONTROL, HttpHeaders.CONNECTION, HttpHeaders.HOST, HttpHeaders.REFERER,
-                    HttpHeaders.USER_AGENT}
+            produces = MediaType.TEXT_HTML_VALUE
     )
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public String getInternalServerErrorView(Model model) {

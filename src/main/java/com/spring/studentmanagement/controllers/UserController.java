@@ -4,6 +4,7 @@ import com.spring.studentmanagement.exceptions.UserNotFoundException;
 import com.spring.studentmanagement.models.AppUser;
 import com.spring.studentmanagement.services.UserService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -28,6 +29,9 @@ public class UserController {
 
     @GetMapping
     public String getUserView(Model model) {
+        final HttpSession session = this.request.getSession();
+        AppUser principal = (AppUser) session.getAttribute("userPrincipal");
+        model.addAttribute("principal", principal);
         final List<AppUser> users = this.userService.findAllUsers();
         model.addAttribute("userList", users);
         return "users";

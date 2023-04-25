@@ -29,6 +29,10 @@ public class AuthController {
     private final SecurityService securityService;
     private final HttpServletRequest request;
 
+    @GetMapping("/login")
+    public String showLoginPage() {
+        return "login";
+    }
     /**
      * This is a mock authentication mechanism
      * For real authentication process we will use Spring Security
