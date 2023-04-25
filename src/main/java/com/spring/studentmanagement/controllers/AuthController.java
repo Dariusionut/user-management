@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  * Created at 4/25/2023 by Darius
@@ -27,18 +28,19 @@ public class AuthController {
     /**
      * This is a mock authentication mechanism
      * For real authentication process we will use Spring Security
+     * Method is not completed
      */
     @PostMapping(path = "/login")
-    public String authenticate() {
+    public String authenticate(RedirectAttributes redirectAttributes) {
         final LoginRequest loginRequest = LoginRequest.getLoginRequest(request);
         try {
             final AppUser user = this.authenticationService.authenticate(loginRequest);
-            // todo to be completed
+            redirectAttributes.addFlashAttribute("userPrincipal", user);
             return "redirect:/users";
         } catch (AuthenticationException e) {
             log.error("Cannot authenticate!");
-
-            return "errors/error-401"; // todo
+            redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
+            return "redirect:/errors/error-401";
         }
 
     }
