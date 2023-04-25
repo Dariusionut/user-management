@@ -3,7 +3,7 @@ package com.spring.studentmanagement.controllers;
 import com.spring.studentmanagement.controllers.requests.LoginRequest;
 import com.spring.studentmanagement.exceptions.AuthenticationException;
 import com.spring.studentmanagement.models.AppUser;
-import com.spring.studentmanagement.services.AuthenticationService;
+import com.spring.studentmanagement.services.AppAuthManager;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Slf4j
 public class AuthController {
 
-    private final AuthenticationService authenticationService;
+    private final AppAuthManager authenticationManager;
     private final HttpServletRequest request;
 
     /**
@@ -34,7 +34,7 @@ public class AuthController {
     public String authenticate(RedirectAttributes redirectAttributes) {
         final LoginRequest loginRequest = LoginRequest.getLoginRequest(request);
         try {
-            final AppUser user = this.authenticationService.authenticate(loginRequest);
+            final AppUser user = this.authenticationManager.authenticate(loginRequest);
             redirectAttributes.addFlashAttribute("userPrincipal", user);
             return "redirect:/users";
         } catch (AuthenticationException e) {
