@@ -33,7 +33,10 @@ jobs:
           languages: ${{ matrix.language }}
 
       - name: Build UserManagement application
+        uses: actions/setup-java@v1
         run: mvn clean package
+        with:
+          java-version: 17
 
       # Autobuild is not needed for Java
       # ...
