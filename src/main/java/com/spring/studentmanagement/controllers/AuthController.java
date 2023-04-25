@@ -3,7 +3,7 @@ package com.spring.studentmanagement.controllers;
 import com.spring.studentmanagement.controllers.requests.LoginRequest;
 import com.spring.studentmanagement.exceptions.AuthenticationException;
 import com.spring.studentmanagement.models.AppUser;
-import com.spring.studentmanagement.services.AppAuthManager;
+import com.spring.studentmanagement.security.services.AppAuthManager;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
