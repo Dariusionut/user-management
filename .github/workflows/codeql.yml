@@ -11,10 +11,7 @@ on:
 jobs:
   analyze:
     name: Analyze
-    runs-on: ubuntu-latest
-    container:
-      image: ubuntu-latest
-      options: --user=root
+    runs-on: ${{ (matrix.language == 'java' && 'ubuntu-latest') || 'macos-latest' }}
     permissions:
       actions: read
       contents: read
@@ -28,9 +25,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-        with:
-          ref: ${{ github.head_ref }}
 
+      # Initializes the CodeQL tools for scanning.
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v2
         with:
@@ -55,7 +51,6 @@ jobs:
           properties: >
             input=src/main/java/com/spring/studentmanagement/controllers/**/*.java
             additionalClasspath=target/UserManagement-1.
-
   deploy:
     name: Deploy
     needs: analyze
