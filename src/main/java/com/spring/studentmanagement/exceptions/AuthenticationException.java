@@ -8,7 +8,7 @@ import java.io.Serial;
  * Created at 4/25/2023 by Darius
  **/
 @Slf4j
-public class AuthenticationException extends RuntimeException {
+public class AuthenticationException extends Exception {
 
     @Serial
     private static final long serialVersionUID = 578783969488844889L;

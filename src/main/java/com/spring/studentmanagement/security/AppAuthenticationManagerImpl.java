@@ -21,7 +21,7 @@ public class AppAuthenticationManagerImpl implements AppAuthManager {
     private final PasswordEncoder encoder;
 
     @Override
-    public AppUser authenticate(LoginRequest request) {
+    public AppUser authenticate(LoginRequest request) throws AuthenticationException {
         log.info("Trying to authenticate");
 
         final AppUser user = this.userRepository.findBYUsernameOrEmail(request.usernameOrEmail())
@@ -33,7 +33,7 @@ public class AppAuthenticationManagerImpl implements AppAuthManager {
 
     }
 
-    private void validateAuthentication(String rawPassword, AppUser user) {
+    private void validateAuthentication(String rawPassword, AppUser user) throws AuthenticationException {
         boolean passwordMatch = this.encoder.matches(rawPassword, user.getPassword());
 
         if (!passwordMatch) {
