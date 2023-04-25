@@ -3,9 +3,9 @@ package com.spring.studentmanagement.services;
 import com.spring.studentmanagement.exceptions.UserNotFoundExceptions;
 import com.spring.studentmanagement.models.AppUser;
 import com.spring.studentmanagement.repositories.UserRepository;
-import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,14 +15,11 @@ import java.util.List;
  */
 @Service
 @Slf4j
-@Data
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-
-    public UserServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    private final PasswordEncoder encoder;
 
     @Override
     public List<AppUser> findAllUsers() {
@@ -43,8 +40,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public AppUser saveUser(AppUser user) {
-        String hashedPassword = new BCryptPasswordEncoder().encode(user.getPassword());
+        final String hashedPassword = this.encoder.encode(user.getPassword());
         user.setPassword(hashedPassword);
+        log.info("Trying to saveUser: {}", user);
         return userRepository.save(user);
     }
 }
