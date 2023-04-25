@@ -41,6 +41,10 @@ public class AuthController {
             log.error("Cannot authenticate!");
             redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
             return "redirect:/errors/error-401";
+        } catch (Exception e) {
+            log.error("Internal server error occurred");
+            redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
+            return "redirect:/errors/error-500";
         }
 
     }
