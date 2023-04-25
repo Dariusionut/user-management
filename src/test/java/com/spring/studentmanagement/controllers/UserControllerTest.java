@@ -3,6 +3,8 @@ package com.spring.studentmanagement.controllers;
 import com.spring.studentmanagement.StudentManagementTest;
 import com.spring.studentmanagement.models.AppUser;
 import com.spring.studentmanagement.services.UserService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -22,6 +24,10 @@ class UserControllerTest implements StudentManagementTest {
 
     @Mock
     private UserService userService;
+    @Mock
+    private HttpServletRequest request;
+    @Mock
+    private HttpSession session;
 
     @InjectMocks
     private UserController userController;
@@ -46,11 +52,13 @@ class UserControllerTest implements StudentManagementTest {
         List<AppUser> users = getUserEntityList();
 
         when(userService.findAllUsers()).thenReturn(users);
+        when(this.request.getSession()).thenReturn(this.session);
 
         String viewName = userController.getUserView(model);
 
         assertEquals("users", viewName);
         verify(userService, times(1)).findAllUsers();
         verify(model, times(1)).addAttribute("userList", users);
+        verify(this.session).getAttribute(anyString());
     }
 }
