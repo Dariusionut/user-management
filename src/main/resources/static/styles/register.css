@@ -25,12 +25,3 @@ body {
     background: rgba(255, 255, 255, 0.15);
     color: #FFFFFF;
 }
-
-.btn-group:first-child {
-    transition: margin-left .3s linear;
-}
-
-.btn-group:first-child:hover {
-    background: red;
-    margin-left: 50%;
-}

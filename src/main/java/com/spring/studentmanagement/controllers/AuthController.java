@@ -33,6 +33,7 @@ public class AuthController {
     public String showLoginPage() {
         return "login";
     }
+
     /**
      * This is a mock authentication mechanism
      * For real authentication process we will use Spring Security
@@ -65,11 +66,12 @@ public class AuthController {
     }
 
     @PostMapping(path = "/register")
-    public String registerUser(@ModelAttribute(name = "user") SignUpRequestDto userRequest) {
+    public String registerUser(@ModelAttribute(name = "user") SignUpRequestDto userRequest, RedirectAttributes redirectAttributes) {
         try {
             final AppUser savedUser = this.securityService.signUp(userRequest);
             log.info("New user registered: {}", savedUser.getUsername());
-            return "redirect:/users";
+            redirectAttributes.addFlashAttribute("registerStatusMsg", "Account successfully created!");
+            return "redirect:/auth/login";
         } catch (Exception ex) {
             log.info("Failed to register user: {}", userRequest.getUsername(), ex);
             return "redirect:/errors/error-500";
