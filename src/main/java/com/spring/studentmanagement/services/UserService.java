@@ -18,4 +18,5 @@ public interface UserService {
     AppUser getUserById(Long userId) throws UserNotFoundException;
 
     AppUser saveUser(AppUser user);
+
 }

@@ -1,4 +1,4 @@
-package com.spring.studentmanagement.security;
+package com.spring.studentmanagement.security.interfaces;
 
 import com.spring.studentmanagement.exceptions.AuthenticationException;
 import com.spring.studentmanagement.models.AppUser;

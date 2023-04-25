@@ -34,7 +34,11 @@ public class AppUser {
     )
     private Role role;
 
-    @OneToOne(targetEntity = Address.class, fetch = FetchType.EAGER)
+    @OneToOne(
+            targetEntity = Address.class,
+            cascade = {CascadeType.MERGE, CascadeType.PERSIST},
+            fetch = FetchType.EAGER
+    )
     @JoinColumn(
             name = "fk_address",
             columnDefinition = "BIGINT NULL",

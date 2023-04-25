@@ -3,6 +3,7 @@ package com.spring.studentmanagement.security;
 import com.spring.studentmanagement.exceptions.AuthenticationException;
 import com.spring.studentmanagement.models.AppUser;
 import com.spring.studentmanagement.repositories.UserRepository;
+import com.spring.studentmanagement.security.interfaces.AppUserDetailsService;
 import com.spring.studentmanagement.security.utils.Security;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

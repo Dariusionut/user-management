@@ -1,78 +1,139 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="~{fragments/head-fragments :: head('Register')}"><title></title></head>
+<head th:include="~{fragments/head-fragments :: head('Register')}"></head>
 
 <body>
-<header>
-  <nav th:replace="~{fragments/navbar-fragments :: header-navbar}"></nav>
-</header>
-<section class="vh-100 bg-image"
-         style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');">
-  <div class="mask d-flex align-items-center h-100 gradient-custom-3">
-    <div class="container h-100">
-      <div class="row d-flex justify-content-center align-items-center h-100">
-        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
-          <div class="card" style="border-radius: 15px;">
-            <div class="card-body p-5">
-              <h2 class="text-uppercase text-center mb-5">Create an account</h2>
+<div class="container mt-5">
 
-              <form>
+    <form th:action="@{/auth/register}"
+          th:method="post"
+          th:object="${newUser}"
+          class="w-50  login_form shadow-lg"
+          style="margin: auto">
 
-                <div class="form-outline mb-4">
-                  <label class="form-label" for="first-name">First Name</label>
-                  <input type="text" id="first-name" class="form-control form-control-lg" />
-                </div>
+        <h3 class="text-white text-center">Student management</h3>
+        <hr>
+        <div class="form-floating">
+            <input type="text"
+                   name="username"
+                   th:field="*{username}"
+                   placeholder="Username"
+                   class="form-control"
+            >
+            <label id="username" class="">Username</label>
 
-                <div class="form-outline mb-4">
-                  <label class="form-label" for="last-name">Last Name</label>
-                  <input type="text" id="last-name" class="form-control form-control-lg" />
-                </div>
-
-                <div class="form-outline mb-4">
-                  <label class="form-label" for="email">Your Email</label>
-                  <input type="email" id="email" class="form-control form-control-lg" />
-                </div>
-
-                <div class="form-outline mb-4">
-                  <label class="form-label" for="username">Username</label>
-                  <input type="text" id="username" class="form-control form-control-lg" />
-                </div>
-
-                <div class="form-outline mb-4">
-                  <label class="form-label" for="password">Password</label>
-                  <input type="password" id="password" class="form-control form-control-lg" />
-                </div>
-
-                <div class="form-outline mb-4">
-                  <label class="form-label" for="repeat-password">Repeat your password</label>
-                  <input type="password" id="repeat-password" class="form-control form-control-lg" />
-                </div>
-
-                <div class="form-check d-flex justify-content-center mb-5">
-                  <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3cg" />
-                  <label class="form-check-label">
-                I agree to all statements in <a target="_blank" href="terms" class="text-body"><u>Terms of service</u></a>
-                </label>
-            </div>
-
-                <div class="d-flex justify-content-center">
-                  <button type="button"
-                          class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
-                </div>
-
-                <p class="text-center text-muted mt-5 mb-0">Have already an account?
-                  <a href="login" class="fw-bold text-body"><u>Login here</u></a></p>
-
-              </form>
-
-            </div>
-          </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
+
+        <div class="form-floating mt-3">
+            <input type="email"
+                   name="email"
+                   th:field="*{email}"
+                   placeholder="Email address"
+                   class="form-control"
+            >
+            <label id="email" class="">Email address</label>
+
+        </div>
+
+        <div class="form-floating mt-3">
+            <input type="password"
+                   name="password"
+                   th:field="*{password}"
+                   placeholder="Password"
+                   class="form-control"
+            >
+            <label id="password" class="">Password</label>
+
+        </div>
+
+        <div class="form-floating mt-3">
+            <input type="password"
+                   th:field="*{confirmPassword}"
+                   placeholder="Confirm password"
+                   class="form-control"
+            >
+            <label id="confirm-password">Confirm password</label>
+
+        </div>
+
+
+        <div class="form-floating mt-4">
+            <input type="text"
+                   name="firstName"
+                   th:field="*{firstName}"
+                   placeholder="First name"
+                   class="form-control"
+            >
+            <label id="firstName">First name</label>
+
+        </div>
+
+        <div class="form-floating mt-3">
+            <input type="text"
+                   name="lastName"
+                   th:field="*{lastName}"
+                   placeholder="Last name"
+                   class="form-control"
+            >
+            <label id="lastName">Last name</label>
+
+        </div>
+
+        <div class="text-white mt-3">
+            <span class="me-2">Account type:</span>
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input"
+                       type="radio"
+                       id="role_user"
+                       value="1"
+                       th:field="*{roleId}"
+                >
+                <label class="form-check-label" for="role_user">Basic user</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input"
+                       type="radio"
+                       id="role_visitor"
+                       value="2"
+                       th:field="*{roleId}"
+                >
+                <label class="form-check-label" for="role_visitor">Visitor</label>
+            </div>
+        </div>
+        <hr>
+
+        <div class="btn-toolbar mt-3">
+            <div class="btn-group">
+                <button type="submit" class="btn btn-primary">Register</button>
+                <button type="reset" class="btn btn-success">Reset</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!--<div class="min-vh-100 d-flex justify-content-center align-items-center">-->
+<!--    <form action=""-->
+<!--          class="border border-dark rounded shadow-lg "-->
+<!--          style="width: 300px"-->
+<!--    >-->
+<!--        <div class="row">-->
+<!--            <div class="col-12 form-floating">-->
+<!--                <input type="text" class="form-control" placeholder="Username">-->
+<!--                <label class="form-label">Username</label>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        <div class="row">-->
+<!--            <div class="col-12 form-floating">-->
+<!--                <input type="text" class="form-control" placeholder="Username">-->
+<!--                <label class="form-label">Username</label>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--    </form>-->
+<!--</div>-->
 
 
 </body>

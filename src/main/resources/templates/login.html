@@ -4,9 +4,6 @@
 <head th:replace="~{fragments/head-fragments :: head('User profile page')}"><title></title></head>
 
 <body>
-<header>
-    <nav th:replace="~{fragments/navbar-fragments :: header-navbar}"></nav>
-</header>
 <section class="container" style="width: 400px; margin-top: 40px;">
     <form th:action="@{/auth/login}"
           method="post"

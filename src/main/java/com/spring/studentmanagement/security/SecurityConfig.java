@@ -1,5 +1,6 @@
 package com.spring.studentmanagement.security;
 
+import com.spring.studentmanagement.security.interfaces.AppAuthManager;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

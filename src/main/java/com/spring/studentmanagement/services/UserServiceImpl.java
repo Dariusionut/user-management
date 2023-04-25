@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -19,7 +20,6 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-    private final PasswordEncoder encoder;
 
     @Override
     public List<AppUser> findAllUsers() {
@@ -40,11 +40,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public AppUser saveUser(AppUser user) {
-        final String hashedPassword = this.encoder.encode(user.getPassword());
-        user.setPassword(hashedPassword);
-        log.info("Trying to saveUser: {}", user);
+        user.setDateAdded(LocalDateTime.now());
         return userRepository.save(user);
     }
+
+
 }
 
 
