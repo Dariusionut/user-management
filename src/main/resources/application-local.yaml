@@ -9,7 +9,7 @@ spring:
     password: ${DB_PASSWORD} # Read from environment variable
     url: ${DB_URL}
   jpa:
-    show-sql: true
+    show-sql: false
     generate-ddl: false
     hibernate:
       ddl-auto: validate

@@ -41,5 +41,7 @@ VALUES (3, NULL, 'Julia', 'Chen', 'juliachen', 'password789', 'julia.chen@exampl
 INSERT INTO app_user (fk_role, fk_address, first_name, last_name, username, password, email, is_enabled, date_added)
 VALUES (1, 5, 'Ryan', 'Garcia', 'ryangarcia', 'passwordabc', 'ryan.garcia@example.com', FALSE, NOW());
 
+INSERT INTO app_user (fk_role, fk_address, first_name, last_name, username, password, email, is_enabled, date_added)
+VALUES (3, null, 'Darius', 'Tinculescu', 'Darius96', '$2a$10$ls59iekZoEyszbC3XRqoB.vyvsM8oV2n.YJxb5g8bVthF4C5Xkhw2', 'darius.tinculescu@outlook.com', TRUE, NOW());
 
 
