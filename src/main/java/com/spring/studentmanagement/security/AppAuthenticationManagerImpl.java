@@ -5,9 +5,11 @@ import com.spring.studentmanagement.exceptions.AuthenticationException;
 import com.spring.studentmanagement.models.AppUser;
 import com.spring.studentmanagement.repositories.UserRepository;
 import com.spring.studentmanagement.security.utils.Security;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.servlet.HandlerInterceptor;
 
 /**
  * Created at 4/25/2023 by Darius
@@ -15,19 +17,21 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Security
 @RequiredArgsConstructor
 @Slf4j
-public class AppAuthenticationManagerImpl implements AppAuthManager {
+public class AppAuthenticationManagerImpl implements AppAuthManager, HandlerInterceptor {
 
     private final UserRepository userRepository;
     private final PasswordEncoder encoder;
+    private final HttpServletRequest request;
 
     @Override
-    public AppUser authenticate(LoginRequest request) throws AuthenticationException {
+    public AppUser authenticate(LoginRequest loginRequest) throws AuthenticationException {
         log.info("Authentication process started....");
 
-        final AppUser user = this.userRepository.findBYUsernameOrEmail(request.usernameOrEmail())
+        final AppUser user = this.userRepository.findBYUsernameOrEmail(loginRequest.usernameOrEmail())
                 .orElseThrow(() -> new AuthenticationException(USERNAME_NOT_FOUND));
 
-        this.validateAuthentication(request.password(), user);
+        this.validateAuthentication(loginRequest.password(), user);
+        request.setAttribute("userPrincipal", user);
 
         return user;
 
