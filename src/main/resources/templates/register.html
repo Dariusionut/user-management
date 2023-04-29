@@ -4,7 +4,7 @@
 <head th:insert="~{fragments/head-fragments :: head('Register')}"> </head>
 
 <body>
-<div class="container p-3">
+<section class="container-auth-form p-3 mt-5">
 
     <form th:action="@{/auth/register}"
           th:method="post"
@@ -57,8 +57,8 @@
 
         </div>
 
-
-        <div class="form-floating mt-4">
+        <hr>
+        <div class="form-floating mt-3">
             <input type="text"
                    name="firstName"
                    th:field="*{firstName}"
@@ -110,11 +110,11 @@
                 <button type="reset" class="btn btn-secondary">Reset</button>
             </div>
 
-                <a th:href="@{/home}" class=" text-warning text-decoration-none">Back</a>
+                <a th:href="@{/home}" class="link-warning text-decoration-none">Back</a>
 
         </div>
     </form>
-</div>
+</section>
 
 </body>
 
