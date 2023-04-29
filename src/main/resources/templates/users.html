@@ -45,7 +45,7 @@
                     <input type="hidden" name="_method" value="delete"/>
                     <button type="button"
                             onclick="deleteUserHandler(this)"
-                            th:attr="data-fullName=${user.getFirstName}"
+                            th:attr="data-fullName=${user.firstName + ' ' + user.lastName}"
                             class="btn btn-danger">Delete
                     </button>
                 </form>
