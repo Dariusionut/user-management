@@ -15,6 +15,10 @@
     width: 350px;
 }
 
+.container-login-page > form input {
+    color: #FFFFFF !important;
+}
+
 .form-control {
     color: #eeeeee;
     border: 1px solid #444343;
