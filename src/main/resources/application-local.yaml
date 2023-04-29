@@ -26,4 +26,4 @@ logging:
     name: logs/student-management.log
 
 security:
-  enabled: false
+  enabled: true
