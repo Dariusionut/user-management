@@ -25,7 +25,7 @@ class ErrorControllerTest {
 
         String viewName = errorController.getInternalServerErrorView(model);
 
-        assertEquals("errors/error-status", viewName);
+        assertEquals("errors/error-500", viewName);
         verify(model).addAttribute("errorTitle", "Internal Server Error");
         verify(model)
                 .addAttribute(
