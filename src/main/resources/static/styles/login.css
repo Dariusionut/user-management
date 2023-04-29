@@ -15,11 +15,7 @@
     width: 350px;
 }
 
-.container-login-page > form input {
-    color: #FFFFFF !important;
-}
-
-.form-control {
+.container-login-page > form .form-control {
     color: #eeeeee;
     border: 1px solid #444343;
     background: rgba(255, 255, 255, 0.10);
@@ -27,7 +23,7 @@
     margin-top: 25px;
 }
 
-.form-control:focus {
+.container-login-page > form  .form-control:focus {
     border: 1px solid #444343;
     color: #eeeeee;
     outline: none;
