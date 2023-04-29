@@ -2,22 +2,20 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: 100px;
 }
 
-.container-login {
-    width: 400px;
-    height: 500px;
-    margin-top: 40px;
-    color: #ccc6c0;
+.container-login-page > form {
     background: rgb(72, 72, 72);
     border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    padding: 40px 20px; /* 40px up and down, 20px left and right */
     box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+    color: #ccc6c0;
+    height: 100%;
+    width: 350px;
 }
 
-.form-control {
+.container-login-page > form .form-control {
     color: #eeeeee;
     border: 1px solid #444343;
     background: rgba(255, 255, 255, 0.10);
@@ -25,7 +23,7 @@
     margin-top: 25px;
 }
 
-.form-control:focus {
+.container-login-page > form  .form-control:focus {
     border: 1px solid #444343;
     color: #eeeeee;
     outline: none;
