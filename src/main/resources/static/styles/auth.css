@@ -48,7 +48,7 @@
 .container-auth-form > form input[type="radio"]:checked + label::before {
     content: "\2713";
     display: inline-block;
-    margin-right: 10px;
+    margin: 0 10px 0 -10px;
     color: #ffc107;
     font-weight: bold;
     border-radius: 50%;
@@ -62,8 +62,7 @@
 .container-auth-form > form input[type="radio"] + label::before {
     content: "";
     display: inline-block;
-    margin-right: 10px;
-    margin-left: -10px;
+    margin: 0 10px 0 -10px;
     width: 18px;
     height: 18px;
     border: 1px solid #333;
