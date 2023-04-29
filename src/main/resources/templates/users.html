@@ -7,18 +7,13 @@
 <header>
     <nav th:replace="~{fragments/navbar-fragments :: header-navbar}"></nav>
 </header>
-<section class="container">
+<section class="container text-light mt-4">
 
     <div th:if="${principal != null}">
         <h3>Hello, <span th:text="${principal.firstName + ' ' + principal.lastName}"></span></h3>
     </div>
     <h1>Users page</h1>
     <hr>
-    <form method='post' th:action="@{/users/logout}">
-        <button type="submit" class="btn btn-danger">Logout</button>
-    </form>
-
-
     <table class="table table-hover table-striped table-bordered">
         <thead class="table-dark">
         <tr>
