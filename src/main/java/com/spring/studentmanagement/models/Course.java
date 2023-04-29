@@ -3,6 +3,7 @@ package com.spring.studentmanagement.models;
 import jakarta.persistence.*;
 import lombok.*;
 @Setter
+@Getter
 @ToString
 @RequiredArgsConstructor
 @AllArgsConstructor
