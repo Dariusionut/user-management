@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head-fragments :: head('Forgot password')}"><title></title></head>
+
+<body>
+<section class="container-login-page">
+
+  <!--/*@thymesVar id="registerStatusMsg" type=""*/-->
+  <h1 th:if="${registerStatusMsg != null}"
+      th:text="${registerStatusMsg}"
+      class="position-absolute top-0 start-0 text-success"
+  >
+  </h1>
+  <form th:action="@{/auth/login}"
+        method="post"
+        th:method="post"
+  >
+    <h3 class="text-white text-center">Please login</h3>
+
+    <hr>
+    <!-- Email input -->
+    <div class="form-floating ">
+      <input type="email"
+             id="email"
+             th:name="Email"
+             placeholder="email address"
+             class="form-control"/>
+      <label class="form-label" for="email">Email address</label>
+    </div>
+
+    <div class="d-flex align-items-center justify-content-start mt-5">
+      <!-- Submit button -->
+      <button type="submit" class="btn btn-primary btn-block">Forgot password</button>
+    </div>
+
+
+  </form>
+</section>
+
+<div th:replace="~{fragments/dialogs :: confirm-dialog}"></div>
+
+</body>
+
+</html>

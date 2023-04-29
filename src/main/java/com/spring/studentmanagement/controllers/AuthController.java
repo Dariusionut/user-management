@@ -93,4 +93,9 @@ public class AuthController {
         redirectAttributes.addFlashAttribute("message", "You have been logged out successfully.");
         return "redirect:/home";
     }
+
+    @GetMapping(path = "/forgot")
+    public String forgotPassword() {
+        return "forgot";
+    }
 }
