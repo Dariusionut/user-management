@@ -9,7 +9,7 @@
 </header>
 <section class="container">
 
-    <div>
+    <div th:if="${principal != null}">
         <h3>Hello, <span th:text="${principal.firstName + ' ' + principal.lastName}"></span></h3>
     </div>
     <h1>Users page</h1>

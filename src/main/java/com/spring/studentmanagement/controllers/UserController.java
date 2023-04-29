@@ -10,7 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -55,17 +54,6 @@ public class UserController {
     public String deleteUser(@RequestParam("userId") Long userId) {
         this.userService.deleteUserById(userId);
         return "redirect:/users";
-    }
-
-    @PostMapping(path = "/logout")
-    public String logout(HttpServletRequest request, RedirectAttributes redirectAttributes) {
-        HttpSession session = request.getSession(false);
-        if (session != null) {
-            session.removeAttribute("userPrincipal");
-            session.invalidate();
-        }
-        redirectAttributes.addFlashAttribute("message", "You have been logged out successfully.");
-        return "redirect:/";
     }
 
 }
