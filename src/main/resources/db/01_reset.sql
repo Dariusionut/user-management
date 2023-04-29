@@ -5,3 +5,8 @@ DROP TABLE IF EXISTS address;
 DROP SEQUENCE IF EXISTS seq_address;
 
 DROP TABLE IF EXISTS role;
+
+DROP TABLE IF EXISTS course;
+DROP SEQUENCE IF EXISTS seq_course;
+
+DROP TABLE IF EXISTS course_category;
