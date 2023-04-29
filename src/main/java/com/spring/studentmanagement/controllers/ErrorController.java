@@ -48,6 +48,6 @@ public class ErrorController {
     public String getInternalServerErrorView(Model model) {
         model.addAttribute("errorTitle", "Internal Server Error");
         model.addAttribute("errorMessage", "Sorry, an internal server error has occurred. We apologize for the inconvenience. Please try again later, or contact our support team if the problem persists.");
-        return "errors/error-status";
+        return "errors/error-500";
     }
 }
