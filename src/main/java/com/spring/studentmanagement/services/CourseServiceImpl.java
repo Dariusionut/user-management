@@ -1,19 +1,20 @@
 package com.spring.studentmanagement.services;
 
 import com.spring.studentmanagement.exceptions.CourseNotFoundException;
-import com.spring.studentmanagement.exceptions.UserNotFoundException;
 import com.spring.studentmanagement.models.Course;
 import com.spring.studentmanagement.repositories.CourseRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class CourseServiceImpl implements CourseService{
+@Transactional(rollbackFor = {Exception.class, CourseNotFoundException.class})
+public class CourseServiceImpl implements CourseService {
     private final CourseRepository courseRepository;
 
     @Override
