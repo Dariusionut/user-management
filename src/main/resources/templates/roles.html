@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User management - roles</title>
+
+
+    <style>
+        body {
+            background-color: #333333;
+            color: #ffffff;
+        }
+
+        #custom_container {
+            display: grid;
+            border: 3px solid darkgreen;
+            padding: 10px;
+            border-radius: 5px;
+
+            grid-template-columns: auto auto auto;
+            overflow-y: scroll;
+            max-height: 300px;
+            /*grid-row-gap: 50px;*/
+            /*grid-column-gap: 50px;*/
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            margin: 15px;
+            padding: 15px;
+            border: 10px dotted darkgreen;
+        }
+
+        button {
+            margin-top: 50px;
+            background-color: darkblue;
+            border: 1px solid black;
+            border-radius: 10px;
+            text-transform: uppercase;
+            padding: 10px;
+            color: white;
+            cursor: pointer;
+
+            /*animation-name: spin;*/
+            /*animation-duration: 1s;*/
+            /*animation-iteration-count: infinite;*/
+
+            /*animation-timing-function: linear;*/
+
+            /*transition-property: margin-left;*/
+            /*transition-timing-function: linear;*/
+            /*transition-duration: 0.2s;*/
+        }
+
+        button[type='reset'] {
+            background-color: darkgreen;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+
+        }
+
+        button:hover {
+            /*margin-left: 500px;*/
+            transform: translateY(-3px);
+        }
+
+        button:active {
+
+            transform: translateY(-1px);
+        }
+
+        span, input, button {
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="custom_container"
+>
+
+    <h1>
+        Heading 1
+    </h1>
+
+</div>
+
+<button type="button"
+        id="myBtn"
+>
+    Click me!!!!!
+</button>
+<br>
+
+<form style="margin-top: 40px"
+      id="calculator"
+>
+    <div>
+        <label>Number 1:</label>
+        <input type="number" name="numOne">
+    </div>
+
+    <div>
+        <label>Number 2:</label>
+        <input type="number" name="numTwo">
+    </div>
+    <div>
+        <label>Result:</label>
+        <input type="number" name="result">
+    </div>
+
+    <button type="submit"
+            style="margin-top: 15px"
+    >
+        Calculate
+    </button>
+
+    <button type="reset"
+            style="margin-top: 15px"
+    >
+        Reset
+    </button>
+</form>
+
+<script>
+    "use strict";
+
+    /*
+     var - before ES6
+     let - after ES6
+     const - after ES6
+     ECMAScript
+     ES6 (ECMAScript 2015)
+     */
+
+    const customContainer = document.getElementById('custom_container');
+    const myBtn = document.getElementById('myBtn');
+
+    function addNewHeading() {
+        const _h1 = document.createElement('h1');
+        _h1.textContent = 'I am added by javascript!';
+        customContainer.appendChild(_h1);
+    }
+
+    myBtn.onclick = addNewHeading;
+
+    const numbers = [1, 2, 3, 4];
+    let sum = 0;
+
+    for (let i = 0; i < numbers.length; i++) {
+        sum += numbers[i];
+    }
+
+    console.log(sum);
+
+    const calculator = document.getElementById('calculator');
+
+    calculator.style.border = '5px solid red';
+    calculator.style.width = 'max-content'
+    calculator.style.padding = '10px'
+    calculator.style.borderRadius = '10px'
+
+    // calculator.addEventListener('')
+
+    calculator.addEventListener('submit', function (event) {
+        event.preventDefault();
+        const form = event.target;
+        const numOne = form.querySelector("input[name='numOne']").value;
+        const numTwo = form.querySelector("input[name='numTwo']").value;
+        const resultInput = form.querySelector("input[name='result']");
+
+        const resultValue = window.parseInt(numOne) + window.parseInt(numTwo);
+
+        resultInput.value = resultValue;
+    })
+
+</script>
+</body>
+</html>
