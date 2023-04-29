@@ -6,6 +6,7 @@ import com.spring.studentmanagement.exceptions.AuthenticationException;
 import com.spring.studentmanagement.models.AppUser;
 import com.spring.studentmanagement.security.interfaces.SecurityService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -25,7 +26,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequiredArgsConstructor
 @Slf4j
 public class AuthController {
-
+    public static final String USER_PRINCIPAL = "userPrincipal";
     private final SecurityService securityService;
     private final HttpServletRequest request;
 
@@ -45,7 +46,7 @@ public class AuthController {
         final LoginRequest loginRequest = LoginRequest.getLoginRequest(request);
         try {
             final AppUser user = this.securityService.signIn(loginRequest);
-            redirectAttributes.addFlashAttribute("userPrincipal", user);
+            redirectAttributes.addFlashAttribute(USER_PRINCIPAL, user);
             return "redirect:/users";
         } catch (AuthenticationException e) {
             log.error("Cannot authenticate!");
@@ -78,5 +79,18 @@ public class AuthController {
         }
     }
 
-
+    @GetMapping(path = "/logout")
+    public String logout(HttpServletRequest request, RedirectAttributes redirectAttributes) {
+        HttpSession session = request.getSession(false);
+        if (session != null && session.getAttribute(USER_PRINCIPAL) != null) {
+            final AppUser userPrincipal = (AppUser) session.getAttribute(USER_PRINCIPAL);
+            session.removeAttribute(USER_PRINCIPAL);
+            session.invalidate();
+            log.info("{} successfully loggedOut!", userPrincipal.getUsername());
+        } else {
+            log.warn("There is no authenticated user to log out!");
+        }
+        redirectAttributes.addFlashAttribute("message", "You have been logged out successfully.");
+        return "redirect:/home";
+    }
 }
