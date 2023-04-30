@@ -1,6 +1,9 @@
 package com.spring.studentmanagement.security.filters;
 
 import com.spring.studentmanagement.models.AppUser;
+import com.spring.studentmanagement.security.AppHttpServletRequestWrapper;
+import com.spring.studentmanagement.security.AppPrincipalImpl;
+import com.spring.studentmanagement.security.interfaces.AppPrincipal;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -31,12 +34,13 @@ public class AuthFilter extends OncePerRequestFilter {
         AppUser user = (AppUser) session.getAttribute("userPrincipal");
         if (user == null) {
             response.sendRedirect("/user-management/errors/error-401");
+            return;
         }
-        log.warn("user = {}", user);
-        log.warn("Filter  url = {}", request.getRequestURI());
 
+        final AppPrincipal appPrincipal = new AppPrincipalImpl(user.getUsername(), user.getRole().getRoleName(), user.getDateAdded());
+        final AppHttpServletRequestWrapper requestWrapper = new AppHttpServletRequestWrapper(request, appPrincipal);
 
-        filterChain.doFilter(request, response);
+        filterChain.doFilter(requestWrapper, response);
     }
 
 }
