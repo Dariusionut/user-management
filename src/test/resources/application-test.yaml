@@ -22,5 +22,8 @@ spring:
       hibernate:
         format_sql: true
 
+security:
+  enabled: true
+
 custom-properties:
   test: 'Test property'
