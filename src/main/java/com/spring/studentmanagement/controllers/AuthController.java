@@ -92,4 +92,9 @@ public class AuthController {
             return REDIRECT_ERROR_500;
         }
     }
+
+    @GetMapping(path = "/forgot")
+    public String forgotPassword() {
+        return "forgot";
+    }
 }
