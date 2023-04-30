@@ -44,7 +44,7 @@ public class SecurityConfig {
         final FilterRegistrationBean<AuthFilter> registrationBean = new FilterRegistrationBean<>();
         final String[] urlPatterns = {
                 "/users/*",
-
+                "/courses/*"
         };
         final AuthFilter filter = new AuthFilter();
         registrationBean.setFilter(filter);
