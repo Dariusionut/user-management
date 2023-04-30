@@ -14,7 +14,7 @@ import lombok.*;
 @Entity(name = "CourseCategory")
 public class CourseCategory {
     @Id
-    @Column(name = "course_category_id", columnDefinition = "BIGINT UNIQUE NOT NULL")
+    @Column(name = "course_category_id", columnDefinition = "BIGINT UNIQUE")
     private Long id;
 
     @Column(name = "course_category_name", length = 65, nullable = false)
