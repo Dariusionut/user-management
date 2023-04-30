@@ -10,7 +10,7 @@
 <section class="container text-light mt-4">
 
     <div th:if="${principal != null}">
-        <h3>Hello, <span th:text="${principal.firstName + ' ' + principal.lastName}"></span></h3>
+        <h3>Hello, <span th:text="${principal.name}"></span></h3>
     </div>
     <h1>Users page</h1>
     <hr>

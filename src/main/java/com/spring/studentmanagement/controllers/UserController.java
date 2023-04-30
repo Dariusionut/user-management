@@ -2,9 +2,9 @@ package com.spring.studentmanagement.controllers;
 
 import com.spring.studentmanagement.controllers.utils.ApiConstants;
 import com.spring.studentmanagement.models.AppUser;
+import com.spring.studentmanagement.security.interfaces.AppPrincipal;
 import com.spring.studentmanagement.services.UserService;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -29,8 +29,7 @@ public class UserController {
 
     @GetMapping
     public String getUserView(Model model) {
-        final HttpSession session = this.request.getSession();
-        AppUser principal = (AppUser) session.getAttribute("userPrincipal");
+        final AppPrincipal principal = (AppPrincipal) request.getUserPrincipal();
         model.addAttribute("principal", principal);
         final List<AppUser> users = this.userService.findAllUsers();
         model.addAttribute("userList", users);

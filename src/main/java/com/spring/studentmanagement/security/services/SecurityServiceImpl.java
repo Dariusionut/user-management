@@ -1,4 +1,4 @@
-package com.spring.studentmanagement.security;
+package com.spring.studentmanagement.security.services;
 
 import com.spring.studentmanagement.controllers.requests.LoginRequest;
 import com.spring.studentmanagement.dto.SignUpRequestDto;
