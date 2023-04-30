@@ -4,6 +4,7 @@ import com.spring.studentmanagement.controllers.requests.LoginRequest;
 import com.spring.studentmanagement.exceptions.AuthenticationException;
 import com.spring.studentmanagement.models.AppUser;
 import com.spring.studentmanagement.security.interfaces.AppAuthManager;
+import com.spring.studentmanagement.security.interfaces.AppUserDetailsService;
 import com.spring.studentmanagement.security.utils.Security;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -20,7 +21,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 @Slf4j
 public class AppAuthenticationManagerImpl implements AppAuthManager, HandlerInterceptor {
 
-    private final UserDetailsServiceImpls userDetailsService;
+    private final AppUserDetailsService userDetailsService;
     private final PasswordEncoder encoder;
     private final HttpServletRequest request;
 

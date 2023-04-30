@@ -2,6 +2,7 @@ package com.spring.studentmanagement.security;
 
 import com.spring.studentmanagement.security.filters.AuthFilter;
 import com.spring.studentmanagement.security.interfaces.AppAuthManager;
+import com.spring.studentmanagement.security.interfaces.AppUserDetailsService;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +25,7 @@ import java.util.List;
 @Slf4j
 public class SecurityConfig {
 
-    private final UserDetailsServiceImpls userDetailsServiceImpls;
+    private final AppUserDetailsService userDetailsServiceImpls;
     private final HttpServletRequest request;
 
     @Bean
