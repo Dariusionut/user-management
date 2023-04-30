@@ -55,7 +55,7 @@ jobs:
           properties: >
             input=src/main/resources/static/scripts/*.js
   build-project:
-    name: Analyze Java
+    name: Build project
     needs:
       - test-coverage
       - analyze-javascript
