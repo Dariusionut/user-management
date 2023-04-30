@@ -29,61 +29,8 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: target/site/jacoco/jacoco.xml
           flags: unittests
-  analyze-java:
-    name: Analyze Java
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Set up Java JDK 17
-        uses: actions/setup-java@v1
-        with:
-          java-version: 17
-
-      - name: Build UserManagement application
-        run: mvn clean package -DskipTests
-#  analyze-java:
-#    name: Analyze Java
-#    needs:
-#      - test-coverage
-#    runs-on: ubuntu-latest
-#    permissions:
-#      actions: read
-#      contents: read
-#      security-events: write
-#
-#    steps:
-#      - name: Checkout repository
-#        uses: actions/checkout@v2
-#
-#      - name: Initialize CodeQL for Java
-#        uses: github/codeql-action/init@v2
-#        with:
-#          languages: java
-#
-#      - name: Set up Java JDK 17
-#        uses: actions/setup-java@v1
-#        with:
-#          java-version: 17
-#
-#      - name: Build UserManagement application
-#        run: mvn clean package
-#
-#      - name: Perform CodeQL Analysis for Java
-#        uses: github/codeql-action/analyze@v2
-#        with:
-#          queries: codeql-suites/java-security-and-quality.qls
-#          database: ./codeql-database-java
-#          sarif-file: ./codeql-results-java.sarif
-#          properties: >
-#            input=src/main/java/**/*.java
-#            additionalClasspath=target/UserManagement-1.
-
   analyze-javascript:
     name: Analyze JavaScript
-    needs:
-      - test-coverage
     runs-on: ubuntu-latest
     permissions:
       actions: read
@@ -107,11 +54,27 @@ jobs:
           sarif-file: ./codeql-results-javascript.sarif
           properties: >
             input=src/main/resources/static/scripts/*.js
+  build-project:
+    name: Analyze Java
+    needs:
+      - test-coverage
+      - analyze-javascript
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Java JDK 17
+        uses: actions/setup-java@v1
+        with:
+          java-version: 17
+
+      - name: Build UserManagement application
+        run: mvn clean package -DskipTests
   deploy:
     name: Deploy
     needs:
-      - analyze-java
-      - analyze-javascript
+      - build-project
     runs-on: ubuntu-latest
     steps:
       - name: Display deployment status...
