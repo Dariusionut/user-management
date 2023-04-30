@@ -11,6 +11,7 @@ import org.springframework.core.env.Environment;
 class StudentManagementApplicationTests implements StudentManagementTest {
     private final Environment environment;
     private final ApplicationContext context;
+
     @Autowired
     public StudentManagementApplicationTests(Environment environment, ApplicationContext context) {
         this.environment = environment;

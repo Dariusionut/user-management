@@ -22,19 +22,6 @@ import java.io.IOException;
 @ConditionalOnProperty(name = "security.enabled", havingValue = "true")
 @Slf4j
 public class AuthFilter extends OncePerRequestFilter {
-    @Override
-    protected boolean shouldNotFilter(HttpServletRequest request) {
-        final String uri = request.getRequestURI();
-        return uri.equals("/user-management/") ||
-                uri.startsWith("/user-management/styles") ||
-                uri.startsWith("/user-management/static") ||
-                uri.startsWith("/user-management/scripts") ||
-                uri.startsWith("/user-management/images") ||
-                uri.startsWith("/user-management/webjars") ||
-                uri.startsWith("/user-management/home") ||
-                uri.startsWith("/user-management/auth") ||
-                uri.startsWith("/user-management/errors");
-    }
 
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request,
@@ -47,6 +34,7 @@ public class AuthFilter extends OncePerRequestFilter {
         }
         log.warn("user = {}", user);
         log.warn("Filter  url = {}", request.getRequestURI());
+
 
         filterChain.doFilter(request, response);
     }
