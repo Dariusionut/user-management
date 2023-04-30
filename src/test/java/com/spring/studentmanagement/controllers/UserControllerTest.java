@@ -6,6 +6,7 @@ import com.spring.studentmanagement.security.AppPrincipalImpl;
 import com.spring.studentmanagement.security.interfaces.AppPrincipal;
 import com.spring.studentmanagement.services.UserService;
 import jakarta.servlet.http.HttpServletRequest;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -42,6 +43,10 @@ class UserControllerTest implements StudentManagementTest {
     @BeforeEach
     void setUp() {
         this.appPrincipal = new AppPrincipalImpl("Test name", "Test authority", LocalDateTime.now());
+
+        Assertions.assertNotNull(this.appPrincipal.getName());
+        Assertions.assertNotNull(this.appPrincipal.getAuthority());
+        Assertions.assertNotNull(this.appPrincipal.getDateAdded());
     }
 
     @Test
