@@ -9,8 +9,30 @@ on:
     - cron: '31 12 * * 5'
 
 jobs:
+  test-coverage:
+    name: Test Coverage
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Java JDK 17
+        uses: actions/setup-java@v1
+        with:
+          java-version: 17
+      - name: Build and Test UserManagement application with JaCoCo
+        run: mvn clean verify
+
+      - name: Upload coverage report to Codecov
+        uses: codecov/codecov-action@v2.1.0
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: target/site/jacoco/jacoco.xml
+          flags: unittests
   analyze-java:
     name: Analyze Java
+    needs:
+      - test-coverage
     runs-on: ubuntu-latest
     permissions:
       actions: read
@@ -46,6 +68,8 @@ jobs:
 
   analyze-javascript:
     name: Analyze JavaScript
+    needs:
+      - test-coverage
     runs-on: ubuntu-latest
     permissions:
       actions: read
@@ -69,34 +93,11 @@ jobs:
           sarif-file: ./codeql-results-javascript.sarif
           properties: >
             input=src/main/resources/static/scripts/*.js
-
-  test-coverage:
-    name: Test Coverage
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Set up Java JDK 17
-        uses: actions/setup-java@v1
-        with:
-          java-version: 17
-
-      - name: Build and Test UserManagement application with JaCoCo
-        run: mvn clean verify
-
-      - name: Upload coverage report to Codecov
-        uses: codecov/codecov-action@v2.1.0
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          files: target/site/jacoco/jacoco.xml
-          flags: unittests
   deploy:
     name: Deploy
     needs:
       - analyze-java
       - analyze-javascript
-      - test-coverage
     runs-on: ubuntu-latest
     steps:
       - name: Display deployment status...
