@@ -122,13 +122,6 @@
             <activation>
                 <activeByDefault>false</activeByDefault>
             </activation>
-            <dependencies>
-                <dependency>
-                    <groupId>com.h2database</groupId>
-                    <artifactId>h2</artifactId>
-                    <scope>test</scope>
-                </dependency>
-            </dependencies>
         </profile>
     </profiles>
 
@@ -166,6 +159,12 @@
                         <goals>
                             <goal>prepare-agent</goal>
                         </goals>
+                        <configuration>
+                            <excludes>
+                                <exclude>com.spring.studentmanagement.StudentManagementApplication</exclude>
+                                <exclude>com.spring.studentmanagement.ServletInitializer</exclude>
+                            </excludes>
+                        </configuration>
                     </execution>
                     <execution>
                         <id>generate-code-coverage-report</id>
@@ -192,7 +191,17 @@
                                         <limit>
                                             <counter>LINE</counter>
                                             <value>COVEREDRATIO</value>
-                                            <minimum>0.1</minimum>
+                                            <minimum>15%</minimum>
+                                        </limit>
+                                    </limits>
+                                </rule>
+                                <rule>
+                                    <element>BUNDLE</element>
+                                    <limits>
+                                        <limit>
+                                            <counter>CLASS</counter>
+                                            <value>COVEREDRATIO</value>
+                                            <minimum>60%</minimum>
                                         </limit>
                                     </limits>
                                 </rule>
