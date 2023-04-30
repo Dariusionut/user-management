@@ -22,7 +22,7 @@ public class AppUser {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_app_user")
     @SequenceGenerator(name = "seq_app_user", allocationSize = 1)
-    @Column(name = "user_id", columnDefinition = "BIGINT NOT NULL DEFAULT NEXTVAL('seq_app_user')")
+    @Column(name = "user_id", columnDefinition = "BIGINT DEFAULT NEXTVAL('seq_app_user') UNIQUE")
     private Long userId;
 
     @ManyToOne(targetEntity = Role.class, fetch = FetchType.EAGER)

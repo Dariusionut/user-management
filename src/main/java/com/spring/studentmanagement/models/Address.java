@@ -19,7 +19,7 @@ public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_address")
     @SequenceGenerator(name = "seq_address", allocationSize = 1)
-    @Column(name = "id", columnDefinition = "BIGINT NOT NULL DEFAULT NEXTVAL('seq_address')")
+    @Column(name = "id", columnDefinition = "BIGINT DEFAULT NEXTVAL('seq_address') UNIQUE")
     private Long id;
 
     @Column(name = "country", length = 45, nullable = false)

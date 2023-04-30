@@ -1,6 +1,6 @@
 package com.spring.studentmanagement.controllers;
 
-import com.spring.studentmanagement.exceptions.UserNotFoundException;
+import com.spring.studentmanagement.controllers.utils.ApiConstants;
 import com.spring.studentmanagement.models.AppUser;
 import com.spring.studentmanagement.services.UserService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -45,8 +45,8 @@ public class UserController {
             // add user information to the model for rendering in the view
             model.addAttribute("user", user);
             return "user";
-        } catch (UserNotFoundException e) {
-            return "redirect:/error";
+        } catch (Exception e) {
+            return ApiConstants.REDIRECT_ERROR_500;
         }
     }
 

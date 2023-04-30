@@ -4,7 +4,7 @@
 <head th:replace="~{fragments/head-fragments :: head('Login')}"><title></title></head>
 
 <body>
-<section class="container-login-page">
+<section class="container-auth-form mt_100">
 
     <!--/*@thymesVar id="registerStatusMsg" type=""*/-->
     <h1 th:if="${registerStatusMsg != null}"
@@ -20,7 +20,7 @@
 
         <hr>
         <!-- Email input -->
-        <div class="form-floating ">
+        <div class="form-floating m3-3">
             <input type="text"
                    id="usernameOrEmail"
                    th:name="usernameOrEmail"
@@ -30,7 +30,7 @@
         </div>
 
         <!-- Password input -->
-        <div class="form-floating ">
+        <div class="form-floating mt-3 ">
             <input type="password"
                    id="password"
                    th:name="password"
@@ -40,7 +40,7 @@
         </div>
 
         <!-- 2 column grid layout for inline styling -->
-        <div class="row mt-3">
+        <div class="row mt-4">
             <div class="col d-flex justify-content-center">
                 <!-- Checkbox -->
                 <div class="form-check">

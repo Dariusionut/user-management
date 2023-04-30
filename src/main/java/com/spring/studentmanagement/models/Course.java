@@ -2,6 +2,7 @@ package com.spring.studentmanagement.models;
 
 import jakarta.persistence.*;
 import lombok.*;
+
 @Setter
 @Getter
 @ToString
@@ -15,7 +16,7 @@ public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_course")
     @SequenceGenerator(name = "seq_course", allocationSize = 1)
-    @Column(name = "course_id", columnDefinition = "UNIQUE NOT NULL DEFAULT nextval('seq_course')")
+    @Column(name = "course_id", columnDefinition = "BIGINT DEFAULT NEXTVAL('seq_course') UNIQUE")
     private Long courseId;
 
     @Column(name = "course_name", length = 65, nullable = false)
@@ -25,7 +26,7 @@ public class Course {
     @JoinColumn(
             name = "fk_course_category",
             nullable = false,
-            columnDefinition = "BIGINT DEFAULT 1",
+            columnDefinition = "BIGINT",
             foreignKey = @ForeignKey(name = "course_fk_course_category")
     )
     private CourseCategory courseCategory;
