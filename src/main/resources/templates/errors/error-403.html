@@ -1,16 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Error Page</title>
-    <link rel="stylesheet" href="/static/styles/errors.css">
-</head>
+<head th:replace="~{fragments/head-fragments :: head('403 Server Error')}"><title></title></head>
+
 <body>
-<div class="error-container error-403">
-    <h1 class="error-title" th:text="${errorTitle}">403 Error</h1>
-    <p class="error-message" th:text="${errorMessage}">Sorry, you are not authorized to access this page.</p>
+<div class="error-container">
+    <h1 class="error-title text-white" th:text="${errorTitle}"></h1>
+    <p class="error-message text-white" th:text="${errorMessage}"></p>
     <p class="error-description">If you think this is a mistake, please contact the administrator.</p>
-    <a href="/user-management" class="back-link">&larr; Go back to the previous page</a>
+    <a href="/user-management" class="back-link">&larr; Back</a>
 </div>
 </body>
 </html>

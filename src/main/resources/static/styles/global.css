@@ -1,5 +1,6 @@
 @import "auth.css";
-@import "./users.css";
+@import "errors.css";
+@import "users.css";
 
 body {
     background: rgba(51, 51, 51);
