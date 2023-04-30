@@ -14,7 +14,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v2.5.1
+
       - name: Set up Java JDK 17
         uses: actions/setup-java@v2
         with:
@@ -23,7 +24,7 @@ jobs:
         run: mvn clean verify
 
       - name: Upload coverage report to Codecov
-        uses: codecov/codecov-action@v2.1.0
+        uses: codecov/codecov-action@v2.2.3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: target/site/jacoco/jacoco.xml
