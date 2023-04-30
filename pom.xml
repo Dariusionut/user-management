@@ -191,7 +191,7 @@
                                         <limit>
                                             <counter>LINE</counter>
                                             <value>COVEREDRATIO</value>
-                                            <minimum>15%</minimum>
+                                            <minimum>35%</minimum>
                                         </limit>
                                     </limits>
                                 </rule>
@@ -201,7 +201,7 @@
                                         <limit>
                                             <counter>CLASS</counter>
                                             <value>COVEREDRATIO</value>
-                                            <minimum>60%</minimum>
+                                            <minimum>80%</minimum>
                                         </limit>
                                     </limits>
                                 </rule>
