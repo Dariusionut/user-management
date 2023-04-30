@@ -48,3 +48,25 @@ h1, h2, h3, h4, h5, h6 {
 .error-403 .error-description {
     color: #721c24;
 }
+
+.error-401 {
+    background-color: #f8d7da;
+}
+
+.error-401 .error-title {
+    color: #721c24;
+}
+
+.error-401 .error-message {
+    color: #721c24;
+}
+
+.error-401 .error-description {
+    color: #721c24;
+}
+
+
+
+
+
+
