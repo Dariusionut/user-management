@@ -6,7 +6,6 @@ import com.spring.studentmanagement.exceptions.AuthenticationException;
 import com.spring.studentmanagement.models.AppUser;
 import com.spring.studentmanagement.security.interfaces.SecurityService;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -17,6 +16,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import static com.spring.studentmanagement.controllers.utils.ApiConstants.*;
+import static com.spring.studentmanagement.security.utils.SecurityConstants.USER_PRINCIPAL;
+
 /**
  * Created at 4/25/2023 by Darius
  **/
@@ -26,7 +28,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequiredArgsConstructor
 @Slf4j
 public class AuthController {
-    public static final String USER_PRINCIPAL = "userPrincipal";
     private final SecurityService securityService;
     private final HttpServletRequest request;
 
@@ -50,12 +51,12 @@ public class AuthController {
             return "redirect:/users";
         } catch (AuthenticationException e) {
             log.error("Cannot authenticate!");
-            redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
-            return "redirect:/errors/error-401";
+            redirectAttributes.addFlashAttribute(ATTR_ERROR_MESSAGE, e.getMessage());
+            return REDIRECT_ERROR_401;
         } catch (Exception e) {
             log.error("Internal server error occurred", e);
-            redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
-            return "redirect:/errors/error-500";
+            redirectAttributes.addFlashAttribute(ATTR_ERROR_MESSAGE, e.getMessage());
+            return REDIRECT_ERROR_500;
         }
 
     }
@@ -75,22 +76,20 @@ public class AuthController {
             return "redirect:/auth/login";
         } catch (Exception ex) {
             log.info("Failed to register user: {}", userRequest.getUsername(), ex);
-            return "redirect:/errors/error-500";
+            return REDIRECT_ERROR_500;
         }
     }
 
     @GetMapping(path = "/logout")
     public String logout(HttpServletRequest request, RedirectAttributes redirectAttributes) {
-        HttpSession session = request.getSession(false);
-        if (session != null && session.getAttribute(USER_PRINCIPAL) != null) {
-            final AppUser userPrincipal = (AppUser) session.getAttribute(USER_PRINCIPAL);
-            session.removeAttribute(USER_PRINCIPAL);
-            session.invalidate();
-            log.info("{} successfully loggedOut!", userPrincipal.getUsername());
-        } else {
-            log.warn("There is no authenticated user to log out!");
+        try {
+            this.securityService.logout(request);
+            redirectAttributes.addFlashAttribute("message", "You have been logged out successfully.");
+            return "redirect:/home";
+        } catch (Exception e) {
+            log.error("Internal server error occurred", e);
+            redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
+            return REDIRECT_ERROR_500;
         }
-        redirectAttributes.addFlashAttribute("message", "You have been logged out successfully.");
-        return "redirect:/home";
     }
 }

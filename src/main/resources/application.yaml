@@ -9,6 +9,7 @@ spring:
     properties:
       hibernate:
         dialect: ${spring.jpa.database-platform}
+    open-in-view: true
   mvc:
     hidden-method:
       filter:

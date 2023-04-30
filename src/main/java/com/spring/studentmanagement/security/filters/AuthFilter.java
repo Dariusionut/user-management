@@ -22,7 +22,6 @@ import java.io.IOException;
 @ConditionalOnProperty(name = "security.enabled", havingValue = "true")
 @Slf4j
 public class AuthFilter extends OncePerRequestFilter {
-
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
         final String uri = request.getRequestURI();
@@ -51,4 +50,5 @@ public class AuthFilter extends OncePerRequestFilter {
 
         filterChain.doFilter(request, response);
     }
+
 }

@@ -34,7 +34,7 @@
 .container-auth-form > form .form-control:-webkit-autofill:active,
 .container-auth-form > form .form-control:-webkit-autofill:hover {
     -webkit-text-fill-color: #EEEEEE;
-    -webkit-box-shadow: 0 0 0 1000px #555 inset;
+    -webkit-box-shadow: 0 0 0 1000px #555 inset !important;
 }
 
 .container-auth-form > form input[type="radio"] {

@@ -10,9 +10,13 @@ import com.spring.studentmanagement.security.interfaces.AppAuthManager;
 import com.spring.studentmanagement.security.interfaces.SecurityService;
 import com.spring.studentmanagement.security.utils.Security;
 import com.spring.studentmanagement.services.UserService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
+import static com.spring.studentmanagement.security.utils.SecurityConstants.USER_PRINCIPAL;
 
 /**
  * Created at 4/25/2023 by Darius
@@ -46,5 +50,18 @@ public class SecurityServiceImpl implements SecurityService {
         user.setPassword(hashedPassword);
         log.info("Trying to saveUser: {}", user);
         return userService.saveUser(user);
+    }
+
+    @Override
+    public void logout(HttpServletRequest request) {
+        final HttpSession session = request.getSession(false);
+        if (session != null && session.getAttribute(USER_PRINCIPAL) != null) {
+            final AppUser userPrincipal = (AppUser) session.getAttribute(USER_PRINCIPAL);
+            session.removeAttribute(USER_PRINCIPAL);
+            session.invalidate();
+            log.info("{} successfully loggedOut!", userPrincipal.getUsername());
+        } else {
+            log.warn("There is no authenticated user to log out!");
+        }
     }
 }
