@@ -160,9 +160,13 @@
                             <goal>prepare-agent</goal>
                         </goals>
                         <configuration>
+                            <includes>
+                                <include>com.spring.studentmanagement.*</include>
+                            </includes>
                             <excludes>
                                 <exclude>com.spring.studentmanagement.StudentManagementApplication</exclude>
                                 <exclude>com.spring.studentmanagement.ServletInitializer</exclude>
+                                <exclude>org.springframework.boot.logging.log4j2.Log4J2LoggingSystem</exclude>
                             </excludes>
                         </configuration>
                     </execution>
@@ -191,24 +195,22 @@
                                         <limit>
                                             <counter>LINE</counter>
                                             <value>COVEREDRATIO</value>
-                                            <minimum>45%</minimum>
+                                            <minimum>50%</minimum>
                                         </limit>
-
                                         <limit>
                                             <counter>CLASS</counter>
                                             <value>COVEREDRATIO</value>
-                                            <minimum>60%</minimum>
+                                            <minimum>50%</minimum>
                                         </limit>
-
                                         <limit>
                                             <counter>METHOD</counter>
-                                            <value>COVERATIO</value>
-                                            <value>60%</value>
+                                            <value>COVEREDRATIO</value>
+                                            <minimum>50%</minimum>
                                         </limit>
                                     </limits>
                                 </rule>
-
                             </rules>
+                            <haltOnFailure>true</haltOnFailure>
                         </configuration>
                     </execution>
                 </executions>
