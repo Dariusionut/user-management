@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import static com.spring.studentmanagement.security.utils.SecurityConstants.USER_PRINCIPAL;
@@ -22,7 +23,7 @@ import static com.spring.studentmanagement.security.utils.SecurityConstants.USER
  * Created at 4/25/2023 by Darius
  **/
 @Security
-@RequiredArgsConstructor
+@RequiredArgsConstructor(onConstructor_ = {@Autowired})
 @Slf4j
 public class SecurityServiceImpl implements SecurityService {
 
@@ -40,7 +41,6 @@ public class SecurityServiceImpl implements SecurityService {
     public AppUser signUp(SignUpRequestDto signUpRequest) {
         if (!signUpRequest.passwordMatches()) {
             log.error("Passwords does not match!");
-            // logic here
         }
         log.info("Started signUp process with request = {}", signUpRequest);
         final String hashedPassword = this.encoder.encode(signUpRequest.getPassword());

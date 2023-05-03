@@ -58,7 +58,6 @@ public class AuthController {
             redirectAttributes.addFlashAttribute(ATTR_ERROR_MESSAGE, e.getMessage());
             return REDIRECT_ERROR_500;
         }
-
     }
 
     @GetMapping(path = "/register")

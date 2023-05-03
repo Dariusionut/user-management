@@ -15,13 +15,14 @@ import lombok.extern.slf4j.Slf4j;
 @Security
 @RequiredArgsConstructor
 @Slf4j
-public class UserDetailsServiceImpls implements AppUserDetailsService {
+public class UserDetailsServiceImpl implements AppUserDetailsService {
 
     private final UserRepository userRepository;
 
     @Override
     public AppUser loadByUsernameOrEmail(String usernameOrEmail) throws AuthenticationException {
-        return this.userRepository.findBYUsernameOrEmail(usernameOrEmail)
+        return this.userRepository.findByUsernameOrEmail(usernameOrEmail)
                 .orElseThrow(() -> new AuthenticationException(USERNAME_NOT_FOUND));
     }
+
 }
