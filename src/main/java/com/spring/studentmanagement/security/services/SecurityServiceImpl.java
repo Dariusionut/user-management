@@ -49,7 +49,12 @@ public class SecurityServiceImpl implements SecurityService {
         user.setRole(role);
         user.setPassword(hashedPassword);
         log.info("Trying to saveUser: {}", user);
-        return userService.saveUser(user);
+        try {
+            return userService.saveUser(user);
+        } catch (Exception e) {
+            log.error("Error saving user: {}", e.getMessage());
+        }
+        return null;
     }
 
     @Override
